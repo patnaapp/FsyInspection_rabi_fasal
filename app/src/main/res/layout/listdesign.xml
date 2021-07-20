@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/buttonshape"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="3dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/AppId"
+                        android:layout_width="152dp"
+                        android:layout_height="wrap_content"
+                        android:text="मोबाइल नंबर:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#0D6582"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="152dp"
+                        android:layout_height="wrap_content"
+                        android:text="किसान का नाम:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#0D6582"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/AppId"
+                        android:id="@+id/app"
+                        />
+
+                    <TextView
+                        android:id="@+id/textfnmae"
+                        android:layout_below="@+id/app"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="किसान के पिता नाम:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#0D6582"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:id="@+id/mob">
+
+                    <TextView
+                        android:id="@+id/appId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_gravity="left"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#000000"
+                        android:textStyle="normal" />
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#000000"
+                        android:textStyle="normal"
+                        android:layout_below="@+id/appId"/>
+                    <TextView
+                        android:id="@+id/f_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#000000"
+                        android:textStyle="normal"
+                        android:layout_below="@+id/txt_name"/>
+                    <ImageView
+                        android:id="@+id/imgcompleted"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:elevation="10dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/doness"
+                        android:onClick="imgcomplete"/>
+                    <ImageView
+                        android:id="@+id/imguploadnew"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:elevation="10dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginTop="15dp"
+
+                        android:src="@drawable/uploadimg"/>
+                    <!--android:onClick="imgup"-->
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:orientation="horizontal" >
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:orientation="horizontal" >
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>
+
+
+
+
+

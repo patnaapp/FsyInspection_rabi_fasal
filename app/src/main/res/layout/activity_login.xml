@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    tools:context=".activity.LoginActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        />
+    <include
+        android:id="@+id/footer"
+        layout="@layout/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center_horizontal"
+            android:text="अकाउंट लॉगिन"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_title"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edittext_style"
+            android:layout_marginBottom="60dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/et_User_Id"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/profile1_icon"
+                        android:singleLine="true"
+                        android:hint="यूजर आईडी"
+                        android:inputType="textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:singleLine="true"
+                        android:drawableLeft="@drawable/lock1"
+                        android:hint="पासवर्ड"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+
+
+
+                <Button
+                    android:id="@+id/btn_Sign_In"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:onClick="Login"
+                    android:layout_margin="20dp"
+                    android:background="#88d498"
+                    android:text="लॉग इन करें"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+        <ImageView
+            android:id="@+id/user_profile_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="4dp"
+            android:src="@drawable/rabifasal"
+            android:layout_alignTop="@+id/login_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/txtVersion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="App Version"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:typeface="serif" />
+
+    </LinearLayout>
+
+</RelativeLayout>
