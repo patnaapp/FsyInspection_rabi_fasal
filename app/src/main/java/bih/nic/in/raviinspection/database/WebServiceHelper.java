@@ -21,7 +21,7 @@ public class WebServiceHelper {
     public static final String SERVICENAMESPACE = "http://epacs.bih.nic.in/";
 
     //public static final String SERVICEURL = "http://epacs.bih.nic.in/FsyInspectionWebServicesRavi.asmx";
-    public static final String SERVICEURL = "http://epacs.bih.nic.in/BRFsyInspectionWebServicesrabi.asmx";
+    public static final String SERVICEURL = "http://epacs.bih.nic.in/BRFsyInspectionWebServicesRabi.asmx";
 
     //public static final String SERVICENAMESPACE = "http://10.133.17.37/";
     //public static final String SERVICEURL1 ="http://10.133.17.37/drishtiwebservice.asmx";
@@ -33,7 +33,7 @@ public class WebServiceHelper {
     private static final String Provision_LIST_METHOD = "GetProvisionalRemarks";
     private static final String Village_LIST_METHOD = "GetVillageLst";
     //private static final String getfarmerdetails = "GetFarmerDetails3";
-    private static final String getfarmerdetails = "GetFarmerDetailsForRabi_new";
+    private static final String getfarmerdetails = "GetFarmerDetailsForRabi";
     private static final String INSERT_Farmer_details = "UploadDocNew";
     private static final String GET_PHOTO_PATH = "getPath";
     static String rest;

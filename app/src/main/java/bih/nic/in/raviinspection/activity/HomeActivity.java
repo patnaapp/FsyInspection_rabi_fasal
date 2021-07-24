@@ -239,7 +239,7 @@ public class HomeActivity extends AppCompatActivity {
                             return true;
 //
                         }
-                        if (id == R.id.action_feedbaupwck) {
+                       /* if (id == R.id.action_feedbaupwck) {
 
 
                             Intent intent=new Intent(getApplicationContext(),Feedbackform.class);
@@ -249,7 +249,7 @@ public class HomeActivity extends AppCompatActivity {
 
                             return true;
 //
-                        }
+                        }*/
                         return true;
                     }
                 });

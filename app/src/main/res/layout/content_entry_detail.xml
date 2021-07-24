@@ -1374,8 +1374,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/lin_gehu_rayti"
@@ -1384,14 +1383,28 @@
                     android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="गेहूँ (रैयती भूमि)"
+                        android:text="गेहूँ की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
 
                     <EditText
                         android:id="@+id/et_gehu_rayti"
@@ -1415,14 +1428,28 @@
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मक्का (रैयती भूमि)"
+                        android:text="मक्का की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                        <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_makka_rayti"
@@ -1446,9 +1473,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_chana_rayti"
@@ -1457,14 +1483,27 @@
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="चना (रैयती भूमि)"
+                        android:text="चना की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_chana_rayti"
@@ -1488,14 +1527,28 @@
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मसूर (रैयती भूमि)"
+                        android:text="मसूर की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_masur_rayti"
@@ -1519,9 +1572,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_arahar_rayti"
@@ -1531,13 +1583,27 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="अरहर (रैयती भूमि)"
+                        android:text="अरहर की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_arahar_rayti"
@@ -1562,13 +1628,27 @@
                     android:padding="5dp"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="राई (रैयती भूमि)"
+                        android:text="राई की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_rae_rayti"
@@ -1592,9 +1672,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_ekh_rayti"
@@ -1604,13 +1683,28 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ईख (रैयती भूमि)"
+                        android:text="ईख की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_ekh_rayti"
@@ -1635,13 +1729,27 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="प्याज (रैयती भूमि)"
+                        android:text="प्याज की बुवाई का रैयती क्षेत्र  "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_pyaj_rayti"
@@ -1677,13 +1785,28 @@
                     android:padding="5dp"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="आलू (रैयती भूमि)"
+                        android:text="आलू की बुवाई का रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_aloo_rayti"
@@ -1745,9 +1868,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_gair_gehu_rayti"
@@ -1756,17 +1878,34 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="गेहूँ (गैर रैयती भूमि)"
+                        android:text="गेहूँ की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/et_gehu_gair_rayti"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_style"
                         android:inputType="text"
@@ -1786,13 +1925,30 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मक्का (गैर रैयती भूमि)"
+                        android:text="मक्का की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_makka_gair_rayti"
@@ -1816,9 +1972,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_gair_chana_rayti"
@@ -1827,17 +1982,34 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="चना (गैर रैयती भूमि)"
+                        android:text="चना की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/et_chana_gair_rayti"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_style"
                         android:inputType="text"
@@ -1857,13 +2029,30 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मसूर (गैर रैयती भूमि)"
+                        android:text="मसूर की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_masur_gair_rayti"
@@ -1887,9 +2076,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_gair_arahar_rayti"
@@ -1898,17 +2086,34 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="अरहर (गैर रैयती भूमि)"
+                        android:text="अरहर की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/et_arahar_gair_rayti"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_style"
                         android:inputType="text"
@@ -1928,13 +2133,30 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="राई (गैर रैयती भूमि)"
+                        android:text="राई की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_rae_gair_rayti"
@@ -1958,9 +2180,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_gair_ekh_rayti"
@@ -1969,17 +2190,33 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ईख (गैर रैयती भूमि)"
+                        android:text="ईख की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/et_ekh_gair_rayti"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_style"
                         android:inputType="text"
@@ -1999,13 +2236,29 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="प्याज (गैर रैयती भूमि)"
+                        android:text="प्याज की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/et_pyaj_gair_rayti"
@@ -2029,9 +2282,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
                     android:id="@+id/lin_gair_aloo_rayti"
@@ -2040,17 +2292,33 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="आलू (गैर रैयती भूमि)"
+                        android:text="आलू की बुवाई का गैर रैयती क्षेत्र "
                         android:textStyle="bold"
                         android:textSize="15dp"
                         android:textColor="#000000"/>
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="(डिसमिल में)"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#FF0000"
+                        android:textStyle="bold" />
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/et_aloo_gair_rayti"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_style"
                         android:inputType="text"
@@ -2282,6 +2550,190 @@
 
             <!--</LinearLayout>-->
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Lin_consumerIsPresent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_electricty_avail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" क्या आवेदक के घर में बिजली कनेक्शन उपलब्ध है ? *"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="#000000"/>
+                    <Spinner
+                        android:id="@+id/sp_electric_avail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_bg"
+                        android:imeOptions="actionUnspecified"
+                        android:paddingRight="20dp"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#43D305" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_electricty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" क्या बिजली उपभोक्ता संख्या उपलब्ध है ? *"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="#000000"/>
+                    <Spinner
+                        android:id="@+id/sp_electric"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_bg"
+                        android:imeOptions="actionUnspecified"
+                        android:paddingRight="20dp"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#43D305" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:id="@+id/ll_et_consumer"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="3dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp">
+
+                        <TextView
+                            android:id="@+id/tv_elecric"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="बिजली उपभोक्ता संख्या "
+                            android:textSize="15dp"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="*"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <EditText
+                                android:id="@+id/et_electricconsumernumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_style"
+                                android:inputType="number"
+
+                                android:hint="बिजली उपभोक्ता संख्या डालें "
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textColor="#000000"
+                                android:textColorHint="@android:color/darker_gray"
+                                android:maxLength="15"/>
+
+
+
+
+
+                        </RelativeLayout>
+
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_swaghoshana_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" क्या स्व-घोषणा पत्र अपलोड है ? *"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="#000000"/>
+                <Spinner
+                    android:id="@+id/sp_swaghoshana_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_bg"
+                    android:imeOptions="actionUnspecified"
+                    android:paddingRight="20dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="#43D305" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_swaghoshana_aawedek_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" क्या स्व-घोषणा पत्र आवेदनकर्ता के नाम से है ? *"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="#000000"/>
+                <Spinner
+                    android:id="@+id/sp_swaghoshana_aawedek_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_bg"
+                    android:imeOptions="actionUnspecified"
+                    android:paddingRight="20dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="#43D305" />
+
+
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/ll_swaghoshana_sambandhit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -2291,7 +2743,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="स्व-घोषणा पत्र संबंधित *"
+                    android:text="स्व-घोषणा पत्र किसके द्वारा सत्यापित है ?*"
                     android:textStyle="bold"
                     android:textSize="15dp"
                     android:textColor="#000000"/>
@@ -2381,6 +2833,107 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+           <!-- <LinearLayout
+                android:id="@+id/ll_swaghoshana_sambandhit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="स्व-घोषणा पत्र संबंधित *"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="#000000"/>
+                <Spinner
+                    android:id="@+id/sp_swaghoshana_patra_sambandhit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_bg"
+                    android:imeOptions="actionUnspecified"
+                    android:paddingRight="20dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="#43D305" />
+
+
+            </LinearLayout>-->
+
+
+            <!--<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/ll_swaghosana_sambandhit_nm"
+                android:paddingBottom="5dp"
+                android:visibility="gone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="3dp">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+
+                    <TextView
+                        android:id="@+id/tv_swaghosana_signer_nm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="स्व घोषणा हस्ताक्षर करने वाले का नाम "
+                        android:textSize="15dp"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="*"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <EditText
+                            android:id="@+id/et_swaghossna_signer_nm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edittext_style"
+                            android:inputType="text"
+                            android:padding="10dp"
+                            android:textColor="#000000"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:maxLength="30"/>
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>-->
             <LinearLayout
             android:id="@+id/ll_lpc_related11"
             android:layout_width="match_parent"

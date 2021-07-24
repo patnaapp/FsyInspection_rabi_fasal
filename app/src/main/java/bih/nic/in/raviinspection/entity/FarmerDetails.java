@@ -124,6 +124,15 @@ public class FarmerDetails implements KvmSerializable, Serializable {
     private String swaghosana_sambandhit_Nm = "";
     private String swaghosana_sambandhit_signer_nm = "";
 
+    private String electric_avail_id = "";
+    private String electric_avail_nm = "";
+    private String electric_id = "";
+    private String electric_nm = "";
+    private String swaghosana_sambandhit_nm = "";
+    private String swaghosana_signer_name = "";
+    private String swaghona_upload = "";
+    private String swaghona_patra_aawedakrta = "";
+
 
 
 
@@ -1166,5 +1175,69 @@ public class FarmerDetails implements KvmSerializable, Serializable {
 
     public void setSwaghosana_sambandhit_signer_nm(String swaghosana_sambandhit_signer_nm) {
         this.swaghosana_sambandhit_signer_nm = swaghosana_sambandhit_signer_nm;
+    }
+
+    public String getElectric_avail_id() {
+        return electric_avail_id;
+    }
+
+    public void setElectric_avail_id(String electric_avail_id) {
+        this.electric_avail_id = electric_avail_id;
+    }
+
+    public String getElectric_avail_nm() {
+        return electric_avail_nm;
+    }
+
+    public void setElectric_avail_nm(String electric_avail_nm) {
+        this.electric_avail_nm = electric_avail_nm;
+    }
+
+    public String getElectric_id() {
+        return electric_id;
+    }
+
+    public void setElectric_id(String electric_id) {
+        this.electric_id = electric_id;
+    }
+
+    public String getElectric_nm() {
+        return electric_nm;
+    }
+
+    public void setElectric_nm(String electric_nm) {
+        this.electric_nm = electric_nm;
+    }
+
+    public String getSwaghosana_sambandhit_nm() {
+        return swaghosana_sambandhit_nm;
+    }
+
+    public void setSwaghosana_sambandhit_nm(String swaghosana_sambandhit_nm) {
+        this.swaghosana_sambandhit_nm = swaghosana_sambandhit_nm;
+    }
+
+    public String getSwaghosana_signer_name() {
+        return swaghosana_signer_name;
+    }
+
+    public void setSwaghosana_signer_name(String swaghosana_signer_name) {
+        this.swaghosana_signer_name = swaghosana_signer_name;
+    }
+
+    public String getSwaghona_upload() {
+        return swaghona_upload;
+    }
+
+    public void setSwaghona_upload(String swaghona_upload) {
+        this.swaghona_upload = swaghona_upload;
+    }
+
+    public String getSwaghona_patra_aawedakrta() {
+        return swaghona_patra_aawedakrta;
+    }
+
+    public void setSwaghona_patra_aawedakrta(String swaghona_patra_aawedakrta) {
+        this.swaghona_patra_aawedakrta = swaghona_patra_aawedakrta;
     }
 }

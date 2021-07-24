@@ -99,13 +99,14 @@ public class EntryDetail extends AppCompatActivity {
     ScrollView scrollview;
     TextView bankpassbook,bhu_swamitwa,swa_gosna;
     TextView identity_card,resedential;
-    LinearLayout ll_remarks,house_hold_id,ll_khata_khesara,lin_wheat,lin_makka,lin_masoor,lin_arhar,lin_sugarcane,lin_potato,lin_raisarso,lin_onion,lin_chana,Lin_consumerIsPresent,lin_soyabin,lin_dhan_makka;
+    LinearLayout ll_remarks,house_hold_id,ll_khata_khesara,ll_et_consumer,ll_swaghoshana_upload,lin_wheat,lin_makka,lin_masoor,lin_arhar,lin_sugarcane,lin_potato,lin_raisarso,lin_onion,lin_chana,Lin_consumerIsPresent,lin_soyabin,lin_dhan_makka;
     String _acceptOrReject="A",_var_aawedak_present_Id="",_var_aawedak_present_Nm="";
+    String _var_electric_avail_Id="",_var_electric_avail_Nm="",_var_electric_Id="",_var_electric_Nm="",_var_swaghosana_sambandhit_Id="",_var_swaghosana_sambandhit_Nm="",_var_swaghoshana_upload_Id="",_var_swaghoshana_upload_Nm="",_var_swaghoshana_aawedek_name_Id="",_var_swaghoshana_aawedek_name_Nm="",_var_swaghoshana_patra_verify_Id="",_var_swaghoshana_patra_verify_Nm="";
     ImageView img_farmerphoto;
     String isEdit = "";
     String slno;
     boolean edit = false;
-    Spinner sp_remarks,sp_aawedak_absent;
+    Spinner sp_remarks,sp_aawedak_absent,sp_swaghoshana_upload,sp_swaghoshana_aawedek_name;
     ArrayAdapter<String> remarksadapter;
     public static String _varremarksID = "", _varremarksName = "0";
     Dialog dialogselectdata;
@@ -126,14 +127,14 @@ public class EntryDetail extends AppCompatActivity {
             Manifest.permission.RECORD_AUDIO,
     };
     public static  File pictureFile;
-    Spinner sp_aawedak_present,sp_lpc_related,sp_lpc_aawedan,sp_ghosit_fasal_kheti,sp_aawedan_ghosit_rakwa,sp_aawedak_one_family;
+    Spinner sp_aawedak_present,sp_lpc_related,sp_lpc_aawedan,sp_ghosit_fasal_kheti,sp_aawedan_ghosit_rakwa,sp_aawedak_one_family,sp_electric_avail,sp_electric;
     String farmerTypeNm="";
     ArrayList<Checklist> ChecklistList = new ArrayList<Checklist>();
     ArrayAdapter<String> checklistadapter;
     String checklist;
     String _var_lpc_rltd_chk_Id="",_var_lpc_rltd_chk_Nm="",_var_lpc_awedn_chk_Id="",_var_lpc_awedn_chk_Nm="",_var_ghosit_fasal_khti_Id="",_var_ghosit_fasal_khti_Nm="";
     String _var_aawedan_ghosit_rakwa_Id="",_var_aawedan_ghosit_rakwa_Nm="",_var_aawedak_one_family_Id="",_var_aawedak_one_family_Nm="";
-    LinearLayout ll_aawedak_absent,ll_lpc_related,ll_aawedak_one_family,ll_lpc_aawedan,ll_aawedan_ghosit_rakwa,ll_kinke_dwara_Satyapan;
+    LinearLayout ll_electricty,ll_aawedak_absent,ll_lpc_related,ll_aawedak_one_family,ll_lpc_aawedan,ll_aawedan_ghosit_rakwa,ll_kinke_dwara_Satyapan;
     EditText et_aawedan_ghosit_rakwa,et_aawedan_ghosit_rakwa_2;
     TextView tv_dhan_makka;
     String aawedak_absent[] = {"-चुनें-","पति","पत्नी","पुत्र","पुत्री","माता","पिता","कोई नहीं"};
@@ -141,9 +142,8 @@ public class EntryDetail extends AppCompatActivity {
     String doc_url="";
     byte[] imageData;
     Spinner sp_swaghoshana_patra_sambandhit;
-    LinearLayout ll_swaghoshana_sambandhit,ll_swaghosana_sambandhit_nm;
+    LinearLayout ll_swaghoshana_sambandhit,ll_swaghosana_sambandhit_nm,ll_swaghoshana_aawedek_name;
     String swa_ghosana_sambandhit[] = {"-चुनें-","स्व-घोषणा पत्र है एवं किसान सलाहकार के द्वारा हस्ताक्षरित है","स्व-घोषणा पत्र है एवं वार्ड सदस्य के द्वारा हस्ताक्षरित है","स्व-घोषणा पत्र नहीं है"};
-    String _var_swaghosana_sambandhit_Id="",_var_swaghosana_sambandhit_Nm="";
     EditText et_swaghossna_signer_nm;
     TextView tv_swaghosana_signer_nm;
 
@@ -216,6 +216,7 @@ public class EntryDetail extends AppCompatActivity {
         et_house_id = (EditText) findViewById(R.id.et_house_id);
         // et_summary = (EditText) findViewById(R.id.et_summary);
         et_rashan_card_num = (EditText) findViewById(R.id.et_rashan_card_num);
+        et_electricconsumernumber = (EditText) findViewById(R.id.et_electricconsumernumber);
 
 
         // new feature
@@ -252,12 +253,19 @@ public class EntryDetail extends AppCompatActivity {
         //lin_dhan_makka = (LinearLayout) findViewById(R.id.lin_dhan_makka);
         ll_aawedak_absent = (LinearLayout) findViewById(R.id.ll_aawedak_absent);
         ll_aawedak_absent.setVisibility(View.GONE);
+        ll_et_consumer = (LinearLayout) findViewById(R.id.ll_et_consumer);
+        ll_et_consumer.setVisibility(View.GONE);
         sp_aawedak_present =  findViewById(R.id.sp_aawedak_present);
         sp_lpc_related =  findViewById(R.id.sp_lpc_related);
         sp_lpc_aawedan =  findViewById(R.id.sp_lpc_aawedan);
         sp_ghosit_fasal_kheti =  findViewById(R.id.sp_ghosit_fasal_kheti);
         sp_aawedan_ghosit_rakwa =  findViewById(R.id.sp_aawedan_ghosit_rakwa);
         sp_aawedak_one_family =  findViewById(R.id.sp_aawedak_one_family);
+        sp_electric_avail =  findViewById(R.id.sp_electric_avail);
+        sp_electric =  findViewById(R.id.sp_electric);
+        sp_swaghoshana_upload =  findViewById(R.id.sp_swaghoshana_upload);
+        sp_swaghoshana_aawedek_name =  findViewById(R.id.sp_swaghoshana_aawedek_name);
+
         ll_lpc_related =  findViewById(R.id.ll_lpc_related);
         ll_aawedak_one_family =  findViewById(R.id.ll_aawedak_one_family);
         ll_lpc_aawedan =  findViewById(R.id.ll_lpc_aawedan);
@@ -348,6 +356,12 @@ public class EntryDetail extends AppCompatActivity {
 
         ll_swaghoshana_sambandhit =  findViewById(R.id.ll_swaghoshana_sambandhit);
         ll_swaghosana_sambandhit_nm =  findViewById(R.id.ll_swaghosana_sambandhit_nm);
+        ll_electricty = (LinearLayout) findViewById(R.id.ll_electricty);
+        ll_electricty.setVisibility(View.GONE);
+        ll_swaghoshana_upload =  findViewById(R.id.ll_swaghoshana_upload);
+        ll_swaghoshana_aawedek_name =  findViewById(R.id.ll_swaghoshana_aawedek_name);
+        ll_swaghoshana_aawedek_name.setVisibility(View.GONE);
+
         tv_swaghosana_signer_nm =  findViewById(R.id.tv_swaghosana_signer_nm);
         //ll_kinke_dwara_Satyapan1 =  findViewById(R.id.ll_kinke_dwara_Satyapan1);
         et_swaghossna_signer_nm =  findViewById(R.id.et_swaghossna_signer_nm);
@@ -357,6 +371,8 @@ public class EntryDetail extends AppCompatActivity {
         sp_aawedak_absent.setAdapter(aawedakAbsent);
 
 
+        ll_swaghoshana_sambandhit.setVisibility(View.GONE);
+        ll_swaghosana_sambandhit_nm.setVisibility(View.GONE);
 
 //        lin_wheat.setVisibility(View.GONE);
 //        lin_makka.setVisibility(View.GONE);
@@ -374,7 +390,8 @@ public class EntryDetail extends AppCompatActivity {
         img_farmerphoto=(ImageView)findViewById(R.id.img_farmerphoto);
 
         // rg_ConsumwerIsPresent=(RadioGroup) findViewById(R.id.rg_ConsumwerIsPresent);
-        //  Lin_consumerIsPresent = (LinearLayout) findViewById(R.id.Lin_consumerIsPresent);
+          Lin_consumerIsPresent = (LinearLayout) findViewById(R.id.Lin_consumerIsPresent);
+        Lin_consumerIsPresent.setVisibility(View.GONE);
         setLocaldata();
         //  tv_remarks.setVisibility(View.GONE);
         //  et_summary.setHint("अभियुक्ति डाले");
@@ -514,6 +531,124 @@ public class EntryDetail extends AppCompatActivity {
             }
         });
 
+        sp_electric_avail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                if (arg2 > 0) {
+                    Checklist wrd = ChecklistList.get(arg2 - 1);
+                    _var_electric_avail_Id =  wrd.getChecklist_Id();
+                    _var_electric_avail_Nm =  wrd.getChecklist_Name();
+
+                    if(_var_electric_avail_Id.equals("1")){
+                        ll_electricty.setVisibility(View.VISIBLE);
+                    }
+                    else if(_var_electric_avail_Id.equals("2")) {
+                        ll_electricty.setVisibility(View.GONE);
+                        ll_et_consumer.setVisibility(View.GONE);
+                    }
+
+                }
+                else if(arg2==0)
+                {
+                    _var_electric_avail_Id="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+        sp_electric.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                if (arg2 > 0) {
+                    Checklist wrd = ChecklistList.get(arg2 - 1);
+                    _var_electric_Id =  wrd.getChecklist_Id();
+                    _var_electric_Nm =  wrd.getChecklist_Name();
+
+                    if(_var_electric_Id.equals("1")){
+                        ll_et_consumer.setVisibility(View.VISIBLE);
+                    }
+                    else if(_var_electric_Id.equals("2")) {
+                        ll_et_consumer.setVisibility(View.GONE);
+                    }
+
+                }
+                else if(arg2==0)
+                {
+                    _var_electric_Id="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        sp_swaghoshana_upload.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                if (arg2 > 0) {
+                    Checklist wrd = ChecklistList.get(arg2 - 1);
+                    _var_swaghoshana_upload_Id =  wrd.getChecklist_Id();
+                    _var_swaghoshana_upload_Nm =  wrd.getChecklist_Name();
+
+                    if(_var_swaghoshana_upload_Id.equals("1")){
+                        ll_swaghoshana_aawedek_name.setVisibility(View.VISIBLE);
+                    }
+                    else if(_var_swaghoshana_upload_Id.equals("2")) {
+                        ll_swaghoshana_aawedek_name.setVisibility(View.GONE);
+                        ll_swaghosana_sambandhit_nm.setVisibility(View.GONE);
+                        ll_swaghoshana_sambandhit.setVisibility(View.GONE);
+                        //sp_swaghoshana_aawedek_name.setSelection(0);
+                        //sp_swaghoshana_patra_sambandhit.setSelection(0);
+                    }
+
+                }
+                else if(arg2==0)
+                {
+                    _var_swaghoshana_upload_Id="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+        sp_swaghoshana_aawedek_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                if (arg2 > 0) {
+                    Checklist wrd = ChecklistList.get(arg2 - 1);
+                    _var_swaghoshana_aawedek_name_Id =  wrd.getChecklist_Id();
+                    _var_swaghoshana_aawedek_name_Nm =  wrd.getChecklist_Name();
+                    if(_var_swaghoshana_aawedek_name_Id.equals("1")){
+                        ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+                    } else if(_var_swaghoshana_aawedek_name_Id.equals("2")) {
+                        ll_swaghoshana_sambandhit.setVisibility(View.GONE);
+                        ll_swaghosana_sambandhit_nm.setVisibility(View.GONE);
+                        et_swaghossna_signer_nm.setText("");
+                        // sp_swaghoshana_patra_sambandhit.setSelection(0);
+                    }
+
+                }
+                else if(arg2==0)
+                {
+
+                    _var_swaghoshana_aawedek_name_Id="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+
         sp_aawedak_present.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
@@ -587,7 +722,7 @@ public class EntryDetail extends AppCompatActivity {
                         sevikaabsent_Id = "7";
                         ll_kinke_dwara_Satyapan.setVisibility(View.GONE);
                         //  ll_kinke_dwara_Satyapan1.setVisibility(View.GONE);
-                        ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+                       // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -1261,6 +1396,76 @@ public class EntryDetail extends AppCompatActivity {
     private String validateRecordBeforeSaving() {
         String isvalid = "yes";
 
+        if (farmerDetails.getTypeofFarmer().equals("2")) {
+            if ((sp_electric_avail != null && sp_electric_avail.getSelectedItem() != null)) {
+                if (!sp_electric_avail.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                    isvalid = "yes";
+                } else {
+                    Toast.makeText(EntryDetail.this, "कृपया क्या बिजली उपलब्ध है का चयन करे ", Toast.LENGTH_LONG).show();
+                    return "no";
+                }
+            }
+            if(_var_electric_avail_Id.equalsIgnoreCase("1")) {
+                if ((sp_electric != null && sp_electric.getSelectedItem() != null)) {
+                    if (!sp_electric.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                        isvalid = "yes";
+                    } else {
+                        Toast.makeText(EntryDetail.this, "कृपया क्या बिजली उपभोक्ता संख्या उपलब्ध है का चयन करे ", Toast.LENGTH_LONG).show();
+                        return "no";
+                    }
+                }
+            }
+            if(_var_electric_Id.equalsIgnoreCase("1")) {
+                if ((et_electricconsumernumber.getText().toString().trim().equals(""))) {
+                    Toast.makeText(EntryDetail.this, "बिजली उपभोक्ता संख्या डाले", Toast.LENGTH_LONG).show();
+                    return "no";
+                }
+            }
+
+        }
+
+        if ((farmerDetails.getTypeofFarmer().equals("2")) ||(farmerDetails.getTypeofFarmer().equals("3"))) {
+            if ((sp_swaghoshana_upload != null && sp_swaghoshana_upload.getSelectedItem() != null)) {
+                if (!sp_swaghoshana_upload.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                    isvalid = "yes";
+                } else {
+                    Toast.makeText(EntryDetail.this, "कृपया क्या स्व-घोषणा पत्र अपलोड है का चयन करे ", Toast.LENGTH_LONG).show();
+                    return "no";
+                }
+            }
+            if(_var_swaghoshana_upload_Id.equals("1")){
+                if ((sp_swaghoshana_aawedek_name != null && sp_swaghoshana_aawedek_name.getSelectedItem() != null)) {
+                    if (!sp_swaghoshana_aawedek_name.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                        isvalid = "yes";
+                    } else {
+                        Toast.makeText(EntryDetail.this, "कृपया क्या स्व-घोषणा पत्र आवेदनकर्ता के नाम से है का चयन करे ", Toast.LENGTH_LONG).show();
+                        return "no";
+                    }
+                }
+                if(_var_swaghoshana_aawedek_name_Id.equals("1")) {
+                    if ((sp_swaghoshana_patra_sambandhit != null && sp_swaghoshana_patra_sambandhit.getSelectedItem() != null)) {
+                        if (!sp_swaghoshana_patra_sambandhit.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                            isvalid = "yes";
+                        } else {
+                            Toast.makeText(EntryDetail.this, "कृपया स्व-घोषणा संबंधित का चयन करे ", Toast.LENGTH_LONG).show();
+                            return "no";
+                        }
+                    }
+                    if (_var_swaghosana_sambandhit_Id.equals("K") || _var_swaghosana_sambandhit_Id.equals("W")) {
+                        if ((et_swaghossna_signer_nm.getText().toString().trim().equals(""))) {
+                            Toast.makeText(EntryDetail.this, "कृपया स्व-घोषणा पत्र पर हस्ताक्षर करने वाले का नाम डाले |", Toast.LENGTH_LONG).show();
+                            return "no";
+                        }
+                    }
+                }
+
+            }
+
+
+
+
+        }
+
         if ((sp_aawedak_present != null && sp_aawedak_present.getSelectedItem() != null)) {
             if (!sp_aawedak_present.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
                 isvalid = "yes";
@@ -1894,14 +2099,14 @@ public class EntryDetail extends AppCompatActivity {
 
         if (farmerDetails.getTypeofFarmer().equals("2")||farmerDetails.getTypeofFarmer().equals("3")) {
 
-            if ((sp_swaghoshana_patra_sambandhit != null && sp_swaghoshana_patra_sambandhit.getSelectedItem() != null)) {
+           /* if ((sp_swaghoshana_patra_sambandhit != null && sp_swaghoshana_patra_sambandhit.getSelectedItem() != null)) {
                 if (!sp_swaghoshana_patra_sambandhit.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
                     isvalid = "yes";
                 } else {
                     Toast.makeText(EntryDetail.this, "कृपया स्व-घोषणा संबंधित का चयन करे ", Toast.LENGTH_LONG).show();
                     return "no";
                 }
-            }
+            }*/
             if (_var_swaghosana_sambandhit_Id.equals("K")||_var_swaghosana_sambandhit_Id.equals("W"))
             {
                 if ((et_swaghossna_signer_nm.getText().toString().trim().equals(""))) {
@@ -2111,8 +2316,17 @@ public class EntryDetail extends AppCompatActivity {
                 // values.put("raisarsofield", et_raisarso.getText().toString().trim());
                 //values.put("onionfield", et_onion.getText().toString().trim());
                 //values.put("chanafield", et_chana.getText().toString().trim());
-                //values.put("electricity", et_electricconsumernumber.getText().toString().trim());
+                values.put("electricity", et_electricconsumernumber.getText().toString().trim());
                 values.put("ConsumerNumberIsPresent",ConsumwerIsPresent);
+
+                values.put("electric_avail_Id",_var_electric_avail_Id);
+                values.put("electric_avail_Nm",_var_electric_avail_Nm);
+                values.put("electric_Id",_var_electric_Id);
+                values.put("electric_Nm",_var_electric_Nm);
+                values.put("swaghoshana_upload_Id",_var_swaghoshana_upload_Id);
+                values.put("swaghoshana_upload_Nm",_var_swaghoshana_upload_Nm);
+                values.put("swaghoshana_aawedek_name_Id",_var_swaghoshana_aawedek_name_Id);
+                values.put("swaghoshana_aawedek_name_Nm",_var_swaghoshana_aawedek_name_Nm);
 
                 values.put("aawedak_present",_var_aawedak_present_Id);
                 values.put("aawedak_absent",sevikaabsent_Id);
@@ -2144,6 +2358,8 @@ public class EntryDetail extends AppCompatActivity {
                 values.put("ekh_gair_rayti",edt_ekh_gair_rayti.getText().toString());
                 values.put("pyaj_gair_rayti",edt_pyaj_gair_rayti.getText().toString());
                 values.put("aloo_gair_rayti",edt_aloo_gair_rayti.getText().toString());
+
+                values.put("TypeOfFarmer",farmerDetails.getTypeofFarmer());
                 values.put("swaghosana_sambandhit_id",_var_swaghosana_sambandhit_Id);
                 values.put("swaghosana_sambandhit_nm",_var_swaghosana_sambandhit_Nm);
                 values.put("swaghosana_signer_name",et_swaghossna_signer_nm.getText().toString());
@@ -2271,6 +2487,9 @@ public class EntryDetail extends AppCompatActivity {
             ll_aawedak_one_family.setVisibility(View.GONE);
             tv_lpc_swagosna.setText("LPC के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.VISIBLE);
+            ll_swaghoshana_upload.setVisibility(View.GONE);
+            ll_swaghoshana_aawedek_name.setVisibility(View.GONE);
+            Lin_consumerIsPresent.setVisibility(View.GONE);
 
         }
         //else if (farmerDetails.getTypeofFarmer().equalsIgnoreCase("गैर रैयत कृषक")) {
@@ -2281,9 +2500,11 @@ public class EntryDetail extends AppCompatActivity {
             ll_khata_khesara.setVisibility(View.GONE);
             ll_lpc_related.setVisibility(View.GONE);
             ll_lpc_aawedan.setVisibility(View.GONE);
-            ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+           // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
             tv_lpc_swagosna.setText("स्व-घोषणा के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.GONE);
+            Lin_consumerIsPresent.setVisibility(View.VISIBLE);
+            ll_swaghoshana_upload.setVisibility(View.VISIBLE);
 
 
         }
@@ -2294,9 +2515,11 @@ public class EntryDetail extends AppCompatActivity {
             ll_khata_khesara.setVisibility(View.GONE);
             ll_lpc_related.setVisibility(View.VISIBLE);
             ll_lpc_aawedan.setVisibility(View.GONE);
-            ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+           // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
             tv_lpc_swagosna.setText("LPC एवं स्व-घोषणा के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.VISIBLE);
+            Lin_consumerIsPresent.setVisibility(View.GONE);
+            ll_swaghoshana_upload.setVisibility(View.VISIBLE);
 
 
         }
@@ -2791,6 +3014,16 @@ public class EntryDetail extends AppCompatActivity {
                 String onionfield = cursor.getString(cursor.getColumnIndex("onionfield")) == null ? "" : cursor.getString(cursor.getColumnIndex("onionfield")).toString();
                 String chanafield = cursor.getString(cursor.getColumnIndex("chanafield")) == null ? "" : cursor.getString(cursor.getColumnIndex("chanafield")).toString();
 
+                String electric_avail_db = cursor.getString(cursor.getColumnIndex("electric_avail_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("electric_avail_Id")).toString();
+                String electric_avail_Id=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",electric_avail_db);
+
+                String electric_db = cursor.getString(cursor.getColumnIndex("electric_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("electric_Id")).toString();
+                String electric_Id=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",electric_db);
+                String swaghoshana_upload_Id_db = cursor.getString(cursor.getColumnIndex("swaghoshana_upload_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("swaghoshana_upload_Id")).toString();
+                String str_swaghoshana_upload_Id=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",swaghoshana_upload_Id_db);
+                String swaghoshana_aawedek_name_db = cursor.getString(cursor.getColumnIndex("swaghoshana_aawedek_name_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("swaghoshana_aawedek_name_Id")).toString();
+                String str_swaghoshana_aawedek_name=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",swaghoshana_aawedek_name_db);
+
                 String aawedak_present = cursor.getString(cursor.getColumnIndex("aawedak_present")) == null ? "" : cursor.getString(cursor.getColumnIndex("aawedak_present")).toString();
                 String aawedak_present_id=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",aawedak_present);
                 String aawedak_absent = cursor.getString(cursor.getColumnIndex("aawedak_absent")) == null ? "" : cursor.getString(cursor.getColumnIndex("aawedak_absent")).toString();
@@ -2865,10 +3098,67 @@ public class EntryDetail extends AppCompatActivity {
 //                et_raisarso.setText(raisarsofield);
 //                et_onion.setText(onionfield);
 //                et_chana.setText(chanafield);
+                if (farmerDetails.getTypeofFarmer().equals("2")) {
+                    sp_electric_avail.setSelection(((ArrayAdapter<String>) sp_electric_avail.getAdapter()).getPosition(electric_avail_Id));
+                    if (electric_avail_Id.equalsIgnoreCase("हाँ")) {
+                        ll_electricty.setVisibility(View.VISIBLE);
+                        sp_electric.setSelection(((ArrayAdapter<String>) sp_electric.getAdapter()).getPosition(electric_Id));
+                        if (electric_Id.equalsIgnoreCase("हाँ")) {
+                            ll_et_consumer.setVisibility(View.VISIBLE);
+                            et_electricconsumernumber.setText(electricity);
+                        } else {
+                            ll_et_consumer.setVisibility(View.GONE);
+                            et_electricconsumernumber.setText("");
+                        }
+                    }else{
+                        ll_electricty.setVisibility(View.GONE);
+                        sp_electric.setSelection(0);
+                        et_electricconsumernumber.setText("");
+                    }
+
+
+                }
+
+                if (farmerDetails.getTypeofFarmer().equals("2")||farmerDetails.getTypeofFarmer().equals("3"))
+                {
+                    Log.d("abcd",_swaghosana_sambandhit_name);
+                    sp_swaghoshana_upload.setSelection(((ArrayAdapter<String>)sp_swaghoshana_upload.getAdapter()).getPosition(str_swaghoshana_upload_Id));
+                    //sp_swaghoshana_aawedek_name.setSelection((checklistadapter).getPosition(str_swaghoshana_aawedek_name));
+                    //sp_swaghoshana_patra_sambandhit.setSelection(((ArrayAdapter<String>) sp_swaghoshana_patra_sambandhit.getAdapter()).getPosition(_swaghosana_sambandhit_name));
+                    //sp_swaghoshana_patra_sambandhit.setSelection((checklistadapter).getPosition(_swaghosana_sambandhit_name));
+                    //et_swaghossna_signer_nm.setText(_swaghosana_signer_nm);
+
+                    if(str_swaghoshana_upload_Id.equals("हाँ")) {
+                        ll_swaghoshana_aawedek_name.setVisibility(View.VISIBLE);
+                        sp_swaghoshana_aawedek_name.setSelection((checklistadapter).getPosition(str_swaghoshana_aawedek_name));
+                        //sp_swaghoshana_aawedek_name.setSelection(((ArrayAdapter<String>) sp_swaghoshana_aawedek_name.getAdapter()).getPosition(str_swaghoshana_aawedek_name));
+                        if (str_swaghoshana_aawedek_name.equalsIgnoreCase("हाँ")) {
+                            ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+                            sp_swaghoshana_patra_sambandhit.setSelection(((ArrayAdapter<String>) sp_swaghoshana_patra_sambandhit.getAdapter()).getPosition(_swaghosana_sambandhit_name));
+                            et_swaghossna_signer_nm.setText(_swaghosana_signer_nm);
+                            if (_swaghosana_sambandhit_name.equalsIgnoreCase("किसान सलाहकार") || _swaghosana_sambandhit_name.equalsIgnoreCase("वार्ड सदस्य")) {
+                                ll_swaghosana_sambandhit_nm.setVisibility(View.VISIBLE);
+                                et_swaghossna_signer_nm.setText(_swaghosana_signer_nm);
+                            } else {
+                                ll_swaghosana_sambandhit_nm.setVisibility(View.GONE);
+                                et_swaghossna_signer_nm.setText("");
+                            }
+                        } else {
+                            sp_swaghoshana_patra_sambandhit.setSelection(0);
+                            ll_swaghoshana_sambandhit.setVisibility(View.GONE);
+
+                        }
+                    }else{
+                        sp_swaghoshana_aawedek_name.setSelection(0);
+                        ll_swaghoshana_aawedek_name.setVisibility(View.GONE);
+                    }
+
+                }
+
                 sp_aawedak_present.setSelection(((ArrayAdapter<String>) sp_aawedak_present.getAdapter()).getPosition(aawedak_present_id));
                 if (farmerDetails.getTypeofFarmer().equals("2")||farmerDetails.getTypeofFarmer().equals("3"))
                 {
-                    sp_swaghoshana_patra_sambandhit.setSelection(((ArrayAdapter<String>) sp_swaghoshana_patra_sambandhit.getAdapter()).getPosition(_swaghosana_sambandhit_name));
+                    //sp_swaghoshana_patra_sambandhit.setSelection(((ArrayAdapter<String>) sp_swaghoshana_patra_sambandhit.getAdapter()).getPosition(_swaghosana_sambandhit_name));
                     if (_swaghosana_sambandhit_ID.equalsIgnoreCase("K")||_swaghosana_sambandhit_ID.equalsIgnoreCase("W")){
                         ll_swaghosana_sambandhit_nm.setVisibility(View.VISIBLE);
                         et_swaghossna_signer_nm.setText(_swaghosana_signer_nm);
@@ -3184,6 +3474,10 @@ public class EntryDetail extends AppCompatActivity {
         sp_lpc_related.setAdapter(checklistadapter);
         sp_lpc_aawedan.setAdapter(checklistadapter);
         sp_ghosit_fasal_kheti.setAdapter(checklistadapter);
+        sp_electric.setAdapter(checklistadapter);
+        sp_electric_avail.setAdapter(checklistadapter);
+        sp_swaghoshana_upload.setAdapter(checklistadapter);
+        sp_swaghoshana_aawedek_name.setAdapter(checklistadapter);
         sp_aawedan_ghosit_rakwa.setAdapter(checklistadapter);
         sp_aawedak_one_family.setAdapter(checklistadapter);
 
