@@ -293,6 +293,8 @@ public class WebServiceHelper {
 
     public static String sendLocaldata(FarmerDetails data) {
         SoapObject request = new SoapObject(SERVICENAMESPACE, INSERT_Farmer_details);
+
+        request.addProperty("TypeOfFarmer", data.getTypeofFarmer());
         request.addProperty("ACNO", data.getRegistrationNO());
         request.addProperty("lat", data.getLatitude());
         request.addProperty("long_", data.getLongitude());
@@ -306,6 +308,13 @@ public class WebServiceHelper {
         request.addProperty("lat3", data.getPic2landLat());
         request.addProperty("long3", data.getPic2landLong());
         request.addProperty("EntryBy", data.getUser_ID());
+        request.addProperty("SelfDecOnlyOne", data.getAawedak_one_family_Id());
+        request.addProperty("LPCiSIssuedByOFFICE", data.getLpc_rltd_chk_Id());
+        request.addProperty("KhataAsPerLPC", data.getLpc_awedn_chk_Id());
+        request.addProperty("LPCDate", data.getDate());
+        request.addProperty("LPCNameAsPerApplicant", data.getAawedan_karta_Id());
+        request.addProperty("IsCrop", data.getGhosit_fasal_khti_Id());
+        request.addProperty("isCropAccordingToDec", data.getAawedan_ghosit_rakwa_Id());
 //        request.addProperty("verifySatus", data.getStatus());
 //        request.addProperty("Remarks", data.getSummary());
 //        request.addProperty("ProvisionalID", data.getProvisionId());
@@ -320,13 +329,6 @@ public class WebServiceHelper {
 //        request.addProperty("cropAreaOnion", data.getEt_onion());
 //        request.addProperty("cropAreaChana", data.getEt_chana());
 //        request.addProperty("ElectricityConsumerNo", data.getElectricity());
-        request.addProperty("IsApplicantPer", data.getAawedak_accept());
-        request.addProperty("IsRelation", data.getAawedak_reject());
-        request.addProperty("SelfDecOnlyOne", data.getAawedak_one_family_Id());
-        request.addProperty("LPCiSIssuedByOFFICE", data.getLpc_rltd_chk_Id());
-        request.addProperty("KhataAsPerLPC", data.getLpc_awedn_chk_Id());
-        request.addProperty("IsCrop", data.getGhosit_fasal_khti_Id());
-        request.addProperty("isCropAccordingToDec", data.getAawedan_ghosit_rakwa_Id());
 
         request.addProperty("cropAreaWheatFarmer", data.getGehu_raytti());
         request.addProperty("cropAreaWheatShare", data.getGehu_gair_raytti());
@@ -347,9 +349,55 @@ public class WebServiceHelper {
         request.addProperty("cropAreaPotatoFarmer", data.getAloo_raytti());
         request.addProperty("cropAreaPotatoShare", data.getAloo_gair_raytti());
 
+        request.addProperty("IsApplicantPer", data.getAawedak_accept());
+        request.addProperty("IsRelation", data.getAawedak_reject());
+        request.addProperty("IsSelfDecUploded", data.getSwaghona_upload());
+        request.addProperty("IsSelfDecAsPerName", data.getSwaghona_patra_aawedakrta());
         request.addProperty("SelfDecStatus", data.getSwaghosana_sambandhit_id());
-       // request.addProperty("Swaghosana_sambandhit_Nm", data.getSwaghosana_sambandhit_Nm());
         request.addProperty("NameOfKSOrWardMember", data.getSwaghosana_sambandhit_signer_nm());
+
+        if(!data.getElectric_avail_id().equalsIgnoreCase("")){
+            if(data.getElectric_avail_id().equalsIgnoreCase("1")){
+                request.addProperty("IsElectricity", "Y");
+                if(data.getElectric_id().equals("1")) {
+                    request.addProperty("IsElectricityNumber","Y");
+                    request.addProperty("ElectricityNumber", data.getElectricity());
+                }else if(data.getElectric_id().equals("2")){
+                    request.addProperty("IsElectricityNumber","N");
+                    request.addProperty("ElectricityNumber", "");
+                }else{
+                    request.addProperty("IsElectricityNumber","");
+                    request.addProperty("ElectricityNumber", "");
+                }
+            }else if(data.getElectric_avail_id().equalsIgnoreCase("2")){
+                request.addProperty("IsElectricity", "N");
+                request.addProperty("IsElectricityNumber", "");
+                request.addProperty("ElectricityNumber", "");
+            }else{
+                request.addProperty("IsElectricity", "");
+                request.addProperty("IsElectricityNumber", "");
+                request.addProperty("ElectricityNumber", "");
+            }
+
+        }else{
+            request.addProperty("IsElectricity", "");
+            request.addProperty("IsElectricityNumber", "");
+            request.addProperty("ElectricityNumber", "");
+        }
+
+        request.addProperty("IsWheat", data.getIs_gehu());
+        request.addProperty("IsMazee", data.getIs_makka());
+        request.addProperty("IsChana", data.getIs_chana());
+        request.addProperty("IsMasoor", data.getIs_masur());
+        request.addProperty("IsArhar", data.getIs_arahar());
+        request.addProperty("IsRai", data.getIs_rai());
+        request.addProperty("isOnion", data.getIs_onion());
+        request.addProperty("isPotato", data.getIs_potato());
+        request.addProperty("isIkha", data.getIs_ikha());
+
+
+
+       // request.addProperty("Swaghosana_sambandhit_Nm", data.getSwaghosana_sambandhit_Nm());
 
         //request.addProperty("CropAreaFarmer", data.getEt_aawedan_ghosit_rakwa());
         //request.addProperty("CropAreaShare", data.getEt_aawedan_ghosit_rakwa_two());

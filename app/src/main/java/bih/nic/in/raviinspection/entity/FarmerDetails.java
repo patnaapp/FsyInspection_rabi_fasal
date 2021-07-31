@@ -130,12 +130,21 @@ public class FarmerDetails implements KvmSerializable, Serializable {
     private String electric_nm = "";
     private String swaghosana_sambandhit_nm = "";
     private String swaghosana_signer_name = "";
+    private String Date = "";
+    private String aawedan_karta_Id = "";
+    private String aawedan_karta_Nm = "";
     private String swaghona_upload = "";
     private String swaghona_patra_aawedakrta = "";
 
-
-
-
+    private String is_gehu = "";
+    private String is_makka = "";
+    private String is_chana = "";
+    private String is_masur = "";
+    private String is_arahar = "";
+    private String is_rai = "";
+    private String is_ikha = "";
+    private String is_onion = "";
+    private String is_potato = "";
 
     public FarmerDetails() {
     }
@@ -1239,5 +1248,101 @@ public class FarmerDetails implements KvmSerializable, Serializable {
 
     public void setSwaghona_patra_aawedakrta(String swaghona_patra_aawedakrta) {
         this.swaghona_patra_aawedakrta = swaghona_patra_aawedakrta;
+    }
+
+    public String getIs_gehu() {
+        return is_gehu;
+    }
+
+    public void setIs_gehu(String is_gehu) {
+        this.is_gehu = is_gehu;
+    }
+
+    public String getIs_makka() {
+        return is_makka;
+    }
+
+    public void setIs_makka(String is_makka) {
+        this.is_makka = is_makka;
+    }
+
+    public String getIs_chana() {
+        return is_chana;
+    }
+
+    public void setIs_chana(String is_chana) {
+        this.is_chana = is_chana;
+    }
+
+    public String getIs_masur() {
+        return is_masur;
+    }
+
+    public void setIs_masur(String is_masur) {
+        this.is_masur = is_masur;
+    }
+
+    public String getIs_arahar() {
+        return is_arahar;
+    }
+
+    public void setIs_arahar(String is_arahar) {
+        this.is_arahar = is_arahar;
+    }
+
+    public String getIs_rai() {
+        return is_rai;
+    }
+
+    public void setIs_rai(String is_rai) {
+        this.is_rai = is_rai;
+    }
+
+    public String getIs_ikha() {
+        return is_ikha;
+    }
+
+    public void setIs_ikha(String is_ikha) {
+        this.is_ikha = is_ikha;
+    }
+
+    public String getIs_onion() {
+        return is_onion;
+    }
+
+    public void setIs_onion(String is_onion) {
+        this.is_onion = is_onion;
+    }
+
+    public String getIs_potato() {
+        return is_potato;
+    }
+
+    public void setIs_potato(String is_potato) {
+        this.is_potato = is_potato;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getAawedan_karta_Id() {
+        return aawedan_karta_Id;
+    }
+
+    public void setAawedan_karta_Id(String aawedan_karta_Id) {
+        this.aawedan_karta_Id = aawedan_karta_Id;
+    }
+
+    public String getAawedan_karta_Nm() {
+        return aawedan_karta_Nm;
+    }
+
+    public void setAawedan_karta_Nm(String aawedan_karta_Nm) {
+        this.aawedan_karta_Nm = aawedan_karta_Nm;
     }
 }

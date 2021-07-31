@@ -962,6 +962,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
            // do {
                 FarmerDetails data = new FarmerDetails();
+            data.setTypeofFarmer(cursor.getString(cursor.getColumnIndex("TypeofFarmer")));
                 data.setRegistrationNO(cursor.getString(cursor.getColumnIndex("RegNo")));
                 data.setStatus(cursor.getString(cursor.getColumnIndex("Status")));
                 data.setSummary(cursor.getString(cursor.getColumnIndex("Summary")));
@@ -988,6 +989,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //                data.setEt_onion(cursor.getString(cursor.getColumnIndex("onionfield")));
 //                data.setEt_chana(cursor.getString(cursor.getColumnIndex("chanafield")));
 //                data.setElectricity(cursor.getString(cursor.getColumnIndex("electricity")));
+
+            data.setElectricity(cursor.getString(cursor.getColumnIndex("electricity")));
+            data.setElectric_avail_id(cursor.getString(cursor.getColumnIndex("electric_avail_Id")));
+            data.setElectric_avail_nm(cursor.getString(cursor.getColumnIndex("electric_avail_Nm")));
+            data.setElectric_id(cursor.getString(cursor.getColumnIndex("electric_Id")));
+            data.setElectric_nm(cursor.getString(cursor.getColumnIndex("electric_Nm")));
+
+            data.setSwaghona_upload(cursor.getString(cursor.getColumnIndex("swaghoshana_upload_Id")));//swaghona upload hai
+            data.setSwaghona_patra_aawedakrta(cursor.getString(cursor.getColumnIndex("swaghoshana_aawedek_name_Id")));//swaghona patra aawedakrta ke naam se hai
 
                 data.setAawedak_accept(cursor.getString(cursor.getColumnIndex("aawedak_present")));
                 data.setAawedak_reject(cursor.getString(cursor.getColumnIndex("aawedak_absent")));
@@ -1022,6 +1032,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 data.setSwaghosana_sambandhit_id(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_id")));
                 data.setSwaghosana_sambandhit_Nm(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_nm")));
                 data.setSwaghosana_sambandhit_signer_nm(cursor.getString(cursor.getColumnIndex("swaghosana_signer_name")));
+                data.setDate(cursor.getString(cursor.getColumnIndex("Date")));
+                data.setAawedan_karta_Id(cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")));
+                data.setAawedan_karta_Nm(cursor.getString(cursor.getColumnIndex("aawedan_karta_Nm")));
+
+                data.setIs_gehu(cursor.getString(cursor.getColumnIndex("Is_genhu")));
+                data.setIs_chana(cursor.getString(cursor.getColumnIndex("Is_chana")));
+                data.setIs_makka(cursor.getString(cursor.getColumnIndex("Is_makka")));
+                data.setIs_arahar(cursor.getString(cursor.getColumnIndex("Is_arhar")));
+                data.setIs_masur(cursor.getString(cursor.getColumnIndex("Is_masur")));
+                data.setIs_rai(cursor.getString(cursor.getColumnIndex("Is_rai")));
+                data.setIs_ikha(cursor.getString(cursor.getColumnIndex("Is_ikha")));
+                data.setIs_onion(cursor.getString(cursor.getColumnIndex("Is_onion")));
+                data.setIs_potato(cursor.getString(cursor.getColumnIndex("Is_potato")));
 
                // data.setPhoto1(cursor.isNull(cursor.getColumnIndex("Photo1")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo1")), Base64.NO_WRAP) : "");
                 //data.setPhoto2(cursor.isNull(cursor.getColumnIndex("Photo2")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo2")), Base64.NO_WRAP) : "");
@@ -1126,7 +1149,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-            data.setAawedak_accept(cursor.getString(cursor.getColumnIndex("aawedak_present")));
+                data.setAawedak_accept(cursor.getString(cursor.getColumnIndex("aawedak_present")));
                 data.setAawedak_reject(cursor.getString(cursor.getColumnIndex("aawedak_absent")));
                 data.setLpc_rltd_chk_Id(cursor.getString(cursor.getColumnIndex("lpc_rltd_chk_Id")));
                 data.setLpc_awedn_chk_Id(cursor.getString(cursor.getColumnIndex("lpc_awedn_chk_Id")));
@@ -1157,6 +1180,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 data.setSwaghosana_sambandhit_id(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_id")));
                 data.setSwaghosana_sambandhit_Nm(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_nm")));
                 data.setSwaghosana_sambandhit_signer_nm(cursor.getString(cursor.getColumnIndex("swaghosana_signer_name")));
+            data.setDate(cursor.getString(cursor.getColumnIndex("Date")));
+            data.setAawedan_karta_Id(cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")));
+            data.setAawedan_karta_Nm(cursor.getString(cursor.getColumnIndex("aawedan_karta_Nm")));
+
+
+            data.setIs_gehu(cursor.getString(cursor.getColumnIndex("Is_genhu")));
+            data.setIs_chana(cursor.getString(cursor.getColumnIndex("Is_chana")));
+            data.setIs_makka(cursor.getString(cursor.getColumnIndex("Is_makka")));
+            data.setIs_arahar(cursor.getString(cursor.getColumnIndex("Is_arhar")));
+            data.setIs_masur(cursor.getString(cursor.getColumnIndex("Is_masur")));
+            data.setIs_rai(cursor.getString(cursor.getColumnIndex("Is_rai")));
+            data.setIs_ikha(cursor.getString(cursor.getColumnIndex("Is_ikha")));
+            data.setIs_onion(cursor.getString(cursor.getColumnIndex("Is_onion")));
+            data.setIs_potato(cursor.getString(cursor.getColumnIndex("Is_potato")));
 
                 //data.setEt_aawedan_ghosit_rakwa(cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa")));
                 //data.setEt_aawedan_ghosit_rakwa_two(cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa_two")));

@@ -2,6 +2,7 @@ package bih.nic.in.raviinspection.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -37,6 +38,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +52,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -75,12 +80,14 @@ public class EntryDetail extends AppCompatActivity {
             et_gehu_gair_rayti,et_makka_gair_rayti,et_chana_gair_rayti,et_masur_gair_rayti,et_arahar_gair_rayti,et_rae_gair_rayti,et_ekh_gair_rayti,et_pyaj_gair_rayti,et_aloo_gair_rayti;
     EditText edt_gehu_rayti,edt_makka_rayti,edt_chana_rayti,edt_masur_rayti,edt_arahar_rayti,edt_rae_rayti,edt_ekh_rayti,edt_pyaj_rayti,edt_aloo_rayti,
             edt_gehu_gair_rayti,edt_makka_gair_rayti,edt_chana_gair_rayti,edt_masur_gair_rayti,edt_arahar_gair_rayti,edt_rae_gair_rayti,edt_ekh_gair_rayti,edt_pyaj_gair_rayti,edt_aloo_gair_rayti;
-    EditText et_soyabin, et_fieldwheat,et_field_makka,et_masoor,et_arhar,et_sugarcane,et_potato,et_raisarso,et_onion,et_chana,et_electricconsumernumber;
-    TextView txtconsumernumber;
-    TextView tv_remarks;
+    EditText et_electricconsumernumber;
+    TextView et_date;
+    private int mYear, mMonth, mDay;
+    DatePickerDialog datedialog;
     Button btn_save;
     String Chk_agree="N";
-    LinearLayout ll_raiyati_all,ll_gair_raiyati_all,ll_raiyati_all_edt,ll_gair_raiyati_all_edt;
+    String Is_genhu="N",Is_makka="N",Is_chana="N",Is_masur="N",Is_rai="N",Is_ikha="N",Is_onion="N",Is_potato="N",Is_arhar="N";
+    LinearLayout ll_raiyati_all,ll_gair_raiyati_all,ll_raiyati_all_edt,ll_gair_raiyati_all_edt,ll_date,ll_lpc_aawedan_karta,ll_chk;
     LinearLayout lin_gehu_rayti,lin_makka_rayti,lin_chana_rayti,lin_masur_rayti,lin_arahar_rayti,lin_Rae_raytti,lin_ekh_rayti,lin_pyaj_rayti,lin_aloo_rayti;
     LinearLayout lin_gair_gehu_rayti,lin_gair_makka_rayti,lin_gair_chana_rayti,lin_gair_masur_rayti,lin_gair_arahar_rayti,lin_gair_Rae_raytti,lin_gair_ekh_rayti,lin_gair_pyaj_rayti,lin_gair_aloo_rayti;
 
@@ -100,13 +107,13 @@ public class EntryDetail extends AppCompatActivity {
     TextView bankpassbook,bhu_swamitwa,swa_gosna;
     TextView identity_card,resedential;
     LinearLayout ll_remarks,house_hold_id,ll_khata_khesara,ll_et_consumer,ll_swaghoshana_upload,lin_wheat,lin_makka,lin_masoor,lin_arhar,lin_sugarcane,lin_potato,lin_raisarso,lin_onion,lin_chana,Lin_consumerIsPresent,lin_soyabin,lin_dhan_makka;
-    String _acceptOrReject="A",_var_aawedak_present_Id="",_var_aawedak_present_Nm="";
+    String _acceptOrReject="A",_var_aawedak_present_Id="",_var_aawedak_present_Nm="",_var_aawedan_karta_Id="",_var_aawedan_karta_Nm="";
     String _var_electric_avail_Id="",_var_electric_avail_Nm="",_var_electric_Id="",_var_electric_Nm="",_var_swaghosana_sambandhit_Id="",_var_swaghosana_sambandhit_Nm="",_var_swaghoshana_upload_Id="",_var_swaghoshana_upload_Nm="",_var_swaghoshana_aawedek_name_Id="",_var_swaghoshana_aawedek_name_Nm="",_var_swaghoshana_patra_verify_Id="",_var_swaghoshana_patra_verify_Nm="";
-    ImageView img_farmerphoto;
+    ImageView img_farmerphoto,img_cal1;
     String isEdit = "";
     String slno;
     boolean edit = false;
-    Spinner sp_remarks,sp_aawedak_absent,sp_swaghoshana_upload,sp_swaghoshana_aawedek_name;
+    Spinner sp_remarks,sp_aawedak_absent,sp_swaghoshana_upload,sp_swaghoshana_aawedek_name,sp_lpc_aawedan_karta;
     ArrayAdapter<String> remarksadapter;
     public static String _varremarksID = "", _varremarksName = "0";
     Dialog dialogselectdata;
@@ -146,6 +153,7 @@ public class EntryDetail extends AppCompatActivity {
     String swa_ghosana_sambandhit[] = {"-चुनें-","स्व-घोषणा पत्र है एवं किसान सलाहकार के द्वारा हस्ताक्षरित है","स्व-घोषणा पत्र है एवं वार्ड सदस्य के द्वारा हस्ताक्षरित है","स्व-घोषणा पत्र नहीं है"};
     EditText et_swaghossna_signer_nm;
     TextView tv_swaghosana_signer_nm;
+    CheckBox chk_genhu,chk_makka,chk_chana,chk_masur,chk_arhar,chk_rai,chk_ikha,chk_onion,chk_potato;
 
 
 
@@ -199,6 +207,8 @@ public class EntryDetail extends AppCompatActivity {
         bhu_swamitwa = (TextView) findViewById(R.id.bhu_swamitwa);
         bhu_swamitwa.setVisibility(View.GONE);
         swa_gosna = (TextView) findViewById(R.id.swa_gosna);
+        et_date = (TextView) findViewById(R.id.et_date);
+        img_cal1 = (ImageView) findViewById(R.id.img_cal1);
         //  tv_remarks = (TextView) findViewById(R.id.tv_remarks);
 
         et_aawedak_name = (EditText) findViewById(R.id.et_aawedak_name);
@@ -265,6 +275,7 @@ public class EntryDetail extends AppCompatActivity {
         sp_electric =  findViewById(R.id.sp_electric);
         sp_swaghoshana_upload =  findViewById(R.id.sp_swaghoshana_upload);
         sp_swaghoshana_aawedek_name =  findViewById(R.id.sp_swaghoshana_aawedek_name);
+        sp_lpc_aawedan_karta =  findViewById(R.id.sp_lpc_aawedan_karta);
 
         ll_lpc_related =  findViewById(R.id.ll_lpc_related);
         ll_aawedak_one_family =  findViewById(R.id.ll_aawedak_one_family);
@@ -272,6 +283,10 @@ public class EntryDetail extends AppCompatActivity {
         et_aawedan_ghosit_rakwa =  findViewById(R.id.et_aawedan_ghosit_rakwa);
         et_aawedan_ghosit_rakwa_2 =  findViewById(R.id.et_aawedan_ghosit_rakwa_2);
         ll_aawedan_ghosit_rakwa =  findViewById(R.id.ll_aawedan_ghosit_rakwa);
+        ll_chk = (LinearLayout) findViewById(R.id.ll_chk);
+        ll_chk.setVisibility(View.GONE);
+        ll_date =  findViewById(R.id.ll_date);
+        ll_lpc_aawedan_karta =  findViewById(R.id.ll_lpc_aawedan_karta);
 
         et_gehu_rayti =  findViewById(R.id.et_gehu_rayti);
         et_makka_rayti =  findViewById(R.id.et_makka_rayti);
@@ -350,6 +365,253 @@ public class EntryDetail extends AppCompatActivity {
         lin_gair_pyaj_rayti_edt =  findViewById(R.id.lin_gair_pyaj_rayti_edt);
         lin_gair_aloo_rayti =  findViewById(R.id.lin_gair_aloo_rayti);
         lin_gair_aloo_rayti_edt =  findViewById(R.id.lin_gair_aloo_rayti_edt);
+
+
+        chk_genhu = (CheckBox) findViewById(R.id.chk_genhu);
+        chk_makka = (CheckBox) findViewById(R.id.chk_makka);
+        chk_chana = (CheckBox) findViewById(R.id.chk_chana);
+        chk_masur = (CheckBox) findViewById(R.id.chk_masur);
+        chk_arhar = (CheckBox) findViewById(R.id.chk_arhar);
+        chk_rai = (CheckBox) findViewById(R.id.chk_rai);
+        chk_ikha = (CheckBox) findViewById(R.id.chk_ikha);
+        chk_onion = (CheckBox) findViewById(R.id.chk_onion);
+        chk_potato = (CheckBox) findViewById(R.id.chk_potato);
+
+        chk_genhu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_genhu = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_gehu_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_gehu_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_gehu_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_gehu_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_genhu = "N";
+                    lin_gehu_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_gehu_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_makka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_makka = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_makka_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_makka_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_makka_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_makka_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_makka = "N";
+                    lin_makka_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_makka_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_chana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_chana = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_chana_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_chana_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_chana_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_chana_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_chana = "N";
+                    lin_chana_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_chana_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        chk_arhar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_arhar = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_arahar_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_arahar_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_arahar_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_arahar_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_arhar = "N";
+                    lin_arahar_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_arahar_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_masur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_masur = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_masur_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_masur_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_masur_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_masur_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_masur = "N";
+                    lin_masur_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_masur_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_rai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_rai= "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_Rae_raytti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_Rae_raytti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_Rae_raytti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_Rae_raytti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_rai = "N";
+                    lin_Rae_raytti_edt.setVisibility(View.GONE);
+                    lin_gair_Rae_raytti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        chk_ikha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_ikha = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_ekh_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_ekh_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_ekh_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_ekh_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_ikha = "N";
+                    lin_ekh_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_ekh_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_onion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_onion = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_onion = "N";
+                    lin_pyaj_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_pyaj_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        chk_potato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                if (checked) {
+                    // Do your coding
+                    Is_potato = "Y";
+                    if (farmerDetails.getTypeofFarmer().equals("1")) {
+                        lin_aloo_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("2")) {
+                        lin_gair_aloo_rayti_edt.setVisibility(View.VISIBLE);
+
+                    }else if (farmerDetails.getTypeofFarmer().equals("3")) {
+                        lin_aloo_rayti_edt.setVisibility(View.VISIBLE);
+                        lin_gair_aloo_rayti_edt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Is_potato = "N";
+                    lin_aloo_rayti_edt.setVisibility(View.GONE);
+                    lin_gair_aloo_rayti_edt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+        img_cal1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDialog();
+            }
+        });
+
         sp_swaghoshana_patra_sambandhit =  findViewById(R.id.sp_swaghoshana_patra_sambandhit);
         swaghosanaarrayadapter = new ArrayAdapter(this, R.layout.dropdownlist, swa_ghosana_sambandhit);
         sp_swaghoshana_patra_sambandhit.setAdapter(swaghosanaarrayadapter);
@@ -748,9 +1010,13 @@ public class EntryDetail extends AppCompatActivity {
 
                     if(_var_lpc_rltd_chk_Id.equals("1")){
                         ll_lpc_aawedan.setVisibility(View.VISIBLE);
+                        ll_date.setVisibility(View.VISIBLE);
+                        ll_lpc_aawedan_karta.setVisibility(View.VISIBLE);
                     }
                     else if(_var_lpc_rltd_chk_Id.equals("2")) {
                         ll_lpc_aawedan.setVisibility(View.GONE);
+                        ll_date.setVisibility(View.GONE);
+                        ll_lpc_aawedan_karta.setVisibility(View.GONE);
                     }
 
                 }
@@ -784,6 +1050,27 @@ public class EntryDetail extends AppCompatActivity {
             }
         });
 
+        sp_lpc_aawedan_karta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                if (arg2 > 0) {
+                    Checklist wrd = ChecklistList.get(arg2 - 1);
+                    _var_aawedan_karta_Id =  wrd.getChecklist_Id();
+                    _var_aawedan_karta_Nm =  wrd.getChecklist_Name();
+
+
+                }
+                else if(arg2==0)
+                {
+                    _var_aawedan_karta_Id="";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
         sp_ghosit_fasal_kheti.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
@@ -826,6 +1113,7 @@ public class EntryDetail extends AppCompatActivity {
                         //et_aawedan_ghosit_rakwa_2.setVisibility(View.GONE);
                         ll_raiyati_all_edt.setVisibility(View.GONE);
                         ll_gair_raiyati_all_edt.setVisibility(View.GONE);
+                        ll_chk.setVisibility(View.GONE);
                     }else {
                         if (farmerDetails.getTypeofFarmer().equals("1")){
 //                            et_aawedan_ghosit_rakwa.setVisibility(View.VISIBLE);
@@ -844,7 +1132,7 @@ public class EntryDetail extends AppCompatActivity {
                             ll_raiyati_all_edt.setVisibility(View.VISIBLE);
                             ll_gair_raiyati_all_edt.setVisibility(View.VISIBLE);
                         }
-
+                        ll_chk.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -1347,6 +1635,69 @@ public class EntryDetail extends AppCompatActivity {
 
 
     }
+
+    public void ShowDialog() {
+
+
+        Calendar c = Calendar.getInstance();
+
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        datedialog = new DatePickerDialog(EntryDetail.this,
+                mDateSetListener, mYear, mMonth, mDay);
+
+        // datedialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+        if (c.getTimeInMillis() < System.currentTimeMillis()) {
+
+            datedialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+        } else {
+            datedialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        }
+
+        // datedialog.getDatePicker().setMinDate(min.getTime());
+        datedialog.show();
+
+    }
+
+    DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+            mYear = selectedYear;
+            mMonth = selectedMonth;
+            mDay = selectedDay;
+            String ds = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+            ds = ds.replace("/", "-");
+            String[] separated = ds.split(" ");
+
+            try {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTimeString = sdf.getTimeInstance().format(new Date());
+
+                String smDay = "" + mDay, smMonth = "" + (mMonth + 1);
+                if (mDay < 10) {
+                    smDay = "0" + mDay;//Integer.parseInt("0" + mDay);
+                }
+                if ((mMonth + 1) < 10) {
+                    smMonth = "0" + (mMonth + 1);
+                }
+
+
+                et_date.setText(mYear + "-" + smMonth + "-" + smDay);
+                //_DOB = mYear + "-" + smMonth + "-" + smDay + " " + newString;
+                //_ed_dob = mYear + smMonth + smDay;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    };
+
     public static GetFilePathAndStatus getFileFromBase64AndSaveInSDCard(String base64, String filename,String extension){
         GetFilePathAndStatus getFilePathAndStatus = new GetFilePathAndStatus();
         try {
@@ -1395,6 +1746,7 @@ public class EntryDetail extends AppCompatActivity {
 
     private String validateRecordBeforeSaving() {
         String isvalid = "yes";
+        double totalArea=0.0;
 
         if (farmerDetails.getTypeofFarmer().equals("2")) {
             if ((sp_electric_avail != null && sp_electric_avail.getSelectedItem() != null)) {
@@ -1511,6 +1863,19 @@ public class EntryDetail extends AppCompatActivity {
                             return "no";
                         }
                     }
+
+                    if ((sp_lpc_aawedan_karta != null && sp_lpc_aawedan_karta.getSelectedItem() != null)) {
+                        if (!sp_lpc_aawedan_karta.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                            isvalid = "yes";
+                        } else {
+                            Toast.makeText(EntryDetail.this, "कृपया LPC के नाम आवेदनकर्ता का है का चयन करे ", Toast.LENGTH_LONG).show();
+                            return "no";
+                        }
+                    }
+                    if ((et_date.getText().toString().trim().equals(""))) {
+                        Toast.makeText(EntryDetail.this, "कृपया LPC निर्गत होने  की तिथि  डाले ", Toast.LENGTH_LONG).show();
+                        return "no";
+                    }
                 }
                 if ((sp_ghosit_fasal_kheti != null && sp_ghosit_fasal_kheti.getSelectedItem() != null)) {
                     if (!sp_ghosit_fasal_kheti.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
@@ -1541,7 +1906,13 @@ public class EntryDetail extends AppCompatActivity {
 //                            }
 //
 //                        }
-                        if (!(farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0"))) {
+                        if (!(chk_genhu.isChecked() || chk_makka.isChecked() || chk_chana.isChecked() || chk_arhar.isChecked() || chk_masur.isChecked() || chk_rai.isChecked()|| chk_ikha.isChecked() || chk_onion.isChecked() || chk_potato.isChecked() )) {
+                            Toast.makeText(EntryDetail.this, "कृपया चेक बॉक्स को चेक कीजिये !", Toast.LENGTH_LONG).show();
+                            return "no";
+
+                        }
+
+                        if (chk_genhu.isChecked() && (!(farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0")))) {
 
                             if ((edt_gehu_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "गेहूँ (रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
@@ -1550,11 +1921,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_gehu_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "गेहूँ रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_gehu_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_makka.isChecked() && (!(farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0")))) {
 
 
                             if ((edt_makka_rayti.getText().toString().trim().equals(""))) {
@@ -1564,11 +1937,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_makka_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मक्का रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_makka_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_chana.isChecked() && (!(farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0")))) {
 
                             if ((edt_chana_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "चना (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
@@ -1577,11 +1952,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_chana_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "चना रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_chana_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_masur.isChecked() && (!(farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_masur_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मसूर (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1589,11 +1966,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_masur_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मसूर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_masur_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_arhar.isChecked() && (!(farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_arahar_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "अरहर (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1601,6 +1980,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_arahar_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "अरहर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_arahar_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -1617,7 +1998,7 @@ public class EntryDetail extends AppCompatActivity {
 //
 //                            }
 //                        }
-                        if (!(farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_ikha.isChecked() && (!(farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_ekh_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "ईख (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1625,11 +2006,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_ekh_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "ईख रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_ekh_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_onion.isChecked() && (!(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_pyaj_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "प्याज (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1637,11 +2020,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_pyaj_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "प्याज रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_pyaj_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_potato.isChecked() && (!(farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_aloo_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "आलू (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1649,6 +2034,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_aloo_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "आलू रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_aloo_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -1693,7 +2080,13 @@ public class EntryDetail extends AppCompatActivity {
 //                            }
 //
 //                        }
-                        if (!(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (!(chk_genhu.isChecked() || chk_makka.isChecked() || chk_chana.isChecked() || chk_arhar.isChecked() || chk_masur.isChecked() || chk_rai.isChecked()|| chk_ikha.isChecked() || chk_onion.isChecked() || chk_potato.isChecked() )) {
+                            Toast.makeText(EntryDetail.this, "कृपया चेक बॉक्स को चेक कीजिये !", Toast.LENGTH_LONG).show();
+                            return "no";
+
+                        }
+
+                        if (chk_genhu.isChecked() && (!(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_gehu_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "गेहूँ (गैर रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1701,11 +2094,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_gehu_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "गेहूँ गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_gehu_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_makka.isChecked() && (!(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_makka_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मक्का (गैर रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1713,11 +2108,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_makka_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मक्का गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_makka_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_chana.isChecked() && (!(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_chana_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "चना (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1725,11 +2122,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_chana_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "चना गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_chana_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_masur.isChecked() && (!(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_masur_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मसूर (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1737,11 +2136,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_masur_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मसूर गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_masur_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_arhar.isChecked() && (!(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_arahar_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "अरहर (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1749,11 +2150,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_arahar_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "अरहर गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_arahar_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_rai.isChecked() && (!(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_rae_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "राई (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1761,11 +2164,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_rae_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "राई गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_rae_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_ikha.isChecked() && (!(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_ekh_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "ईख (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1773,11 +2178,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_ekh_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "ईख गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_ekh_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_onion.isChecked() && (!(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_pyaj_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "प्याज (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1785,11 +2192,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_pyaj_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "प्याज गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_pyaj_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_potato.isChecked() && (!(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_aloo_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "आलू (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1797,6 +2206,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_aloo_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "आलू गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_aloo_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -1830,6 +2241,20 @@ public class EntryDetail extends AppCompatActivity {
                             return "no";
                         }
                     }
+
+                    if ((sp_lpc_aawedan_karta != null && sp_lpc_aawedan_karta.getSelectedItem() != null)) {
+                        if (!sp_lpc_aawedan_karta.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
+                            isvalid = "yes";
+                        } else {
+                            Toast.makeText(EntryDetail.this, "कृपया LPC के नाम आवेदनकर्ता का है का चयन करे ", Toast.LENGTH_LONG).show();
+                            return "no";
+                        }
+                    }
+
+                    if ((et_date.getText().toString().trim().equals(""))) {
+                        Toast.makeText(EntryDetail.this, "कृपया LPC निर्गत होने  की तिथि  डाले ", Toast.LENGTH_LONG).show();
+                        return "no";
+                    }
                 }
                 if ((sp_ghosit_fasal_kheti != null && sp_ghosit_fasal_kheti.getSelectedItem() != null)) {
                     if (!sp_ghosit_fasal_kheti.getSelectedItem().toString().equalsIgnoreCase("-चुनें-")) {
@@ -1850,7 +2275,13 @@ public class EntryDetail extends AppCompatActivity {
                     }
                     if (_var_aawedan_ghosit_rakwa_Id.equalsIgnoreCase("2")) {
 
-                        if (!(farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0"))) {
+                        if (!(chk_genhu.isChecked() || chk_makka.isChecked() || chk_chana.isChecked() || chk_arhar.isChecked() || chk_masur.isChecked() || chk_rai.isChecked()|| chk_ikha.isChecked() || chk_onion.isChecked() || chk_potato.isChecked() )) {
+                            Toast.makeText(EntryDetail.this, "कृपया चेक बॉक्स को चेक कीजिये !", Toast.LENGTH_LONG).show();
+                            return "no";
+
+                        }
+
+                        if (chk_genhu.isChecked() && (!(farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0")))) {
 
                             if ((edt_gehu_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "गेहूँ (रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
@@ -1859,11 +2290,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_gehu_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "गेहूँ रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_gehu_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_makka.isChecked() && (!(farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0")))) {
 
 
                             if ((edt_makka_rayti.getText().toString().trim().equals(""))) {
@@ -1873,11 +2306,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_makka_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मक्का रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_makka_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_chana.isChecked() && (!(farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0")))) {
 
                             if ((edt_chana_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "चना (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
@@ -1886,11 +2321,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_chana_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "चना रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_chana_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_masur.isChecked() && (!(farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_masur_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मसूर (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1898,11 +2335,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_masur_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मसूर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_masur_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_arhar.isChecked() && (!(farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_arahar_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "अरहर (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1910,6 +2349,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_arahar_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "अरहर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_arahar_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -1926,7 +2367,7 @@ public class EntryDetail extends AppCompatActivity {
 //
 //                            }
 //                        }
-                        if (!(farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_ikha.isChecked() && (!(farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_ekh_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "ईख (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1934,11 +2375,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_ekh_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "ईख रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_ekh_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_onion.isChecked() && (!(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_pyaj_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "प्याज (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1946,11 +2389,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_pyaj_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "प्याज रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }{
+                                    totalArea = totalArea + (Double.valueOf(edt_pyaj_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_potato.isChecked() && (!(farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_aloo_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "आलू (रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1958,6 +2403,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_aloo_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "आलू रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_aloo_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -1983,7 +2430,7 @@ public class EntryDetail extends AppCompatActivity {
 //                            }
 //
 //                        }
-                        if (!(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_genhu.isChecked() && (!(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_gehu_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "गेहूँ (गैर रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -1991,11 +2438,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_gehu_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "गेहूँ गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_gehu_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_makka.isChecked() && (!(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_makka_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मक्का (गैर रैयती भूमि) का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2003,11 +2452,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_makka_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मक्का गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_makka_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_chana.isChecked() && (!(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_chana_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "चना (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2015,11 +2466,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_chana_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "चना गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_chana_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_masur.isChecked() && (!(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_masur_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "मसूर (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2027,11 +2480,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_masur_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "मसूर गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_masur_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_arhar.isChecked() && (!(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_arahar_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "अरहर (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2039,6 +2494,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_arahar_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "अरहर गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_arahar_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -2055,7 +2512,7 @@ public class EntryDetail extends AppCompatActivity {
 //
 //                            }
 //                        }
-                        if (!(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_ikha.isChecked() && (!(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_ekh_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "ईख (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2063,11 +2520,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_ekh_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "ईख गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_ekh_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_onion.isChecked() && (!(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_pyaj_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "प्याज (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2075,11 +2534,13 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_pyaj_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "प्याज गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_pyaj_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
                         }
-                        if (!(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0"))) {
+                        if (chk_potato.isChecked() && (!(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0")))) {
                             if ((edt_aloo_gair_rayti.getText().toString().trim().equals(""))) {
                                 Toast.makeText(EntryDetail.this, "आलू (गैर रैयती भूमि) का भूमि का क्षेत्र(कुल रकवा डिसमिल में) में डाले ", Toast.LENGTH_LONG).show();
                                 return "no";
@@ -2087,6 +2548,8 @@ public class EntryDetail extends AppCompatActivity {
                                 if (Double.valueOf(edt_aloo_gair_rayti.getText().toString()) > 9999) {
                                     Toast.makeText(EntryDetail.this, "आलू गैर रैयती भूमि का क्षेत्र(कुल रकवा डिसमिल में) 0 से बड़ा या 9999 से छोटा होना चाहिए", Toast.LENGTH_LONG).show();
                                     return "no";
+                                }else{
+                                    totalArea = totalArea + (Double.valueOf(edt_aloo_gair_rayti.getText().toString().trim()));
                                 }
 
                             }
@@ -2117,99 +2580,17 @@ public class EntryDetail extends AppCompatActivity {
 
         }
 
+        if(totalArea> Double.valueOf(farmerDetails.getArea())){
+            Toast.makeText(EntryDetail.this, "फसल का वास्तविक बुआई क्षेत्र आवेदन में घोषित बुआई क्षेत्र से अधिक नहीं हो सकता है। ", Toast.LENGTH_LONG).show();
+            return "no";
+        }
+
         if (!(chk_agree.isChecked())) {
             Toast.makeText(getApplicationContext(), "कृपया प्रमाणित करे", Toast.LENGTH_LONG).show();
             return "no";
 
             //your validation here..
         }
-
-
-//        if ((sp_remarks != null && sp_remarks.getSelectedItem() != null)) {
-//            if (!sp_remarks.getSelectedItem().toString().equalsIgnoreCase("-Select-")) {
-//                isvalid = "yes";
-//            } else {
-//                Toast.makeText(EntryDetail.this, "कृपया अभियुक्ति का चयन करे ", Toast.LENGTH_LONG).show();
-//                return "no";
-//            }
-//        }
-//
-//        if (_varremarksID.equals("13")) {
-//            if ((et_summary.getText().toString().trim().equals(""))) {
-//                Toast.makeText(EntryDetail.this, "कृपया अभियुक्ति डाले", Toast.LENGTH_LONG).show();
-//                return "no";
-//            }
-//        }
-//        if(et_rashan_card_num.getText().toString().length()>0) {
-//            //Toast.makeText(EntryDetail.this, "राशन कार्ड नंबर डाले", Toast.LENGTH_LONG).show();
-//            //et_rashan_card_num.requestFocus();
-//            //return "no";
-//
-//            if (et_rashan_card_num.getText().toString().trim().length() < 20) {
-//                Toast.makeText(EntryDetail.this, "कृपया मान्य राशन कार्ड नंबर दर्ज करें.", Toast.LENGTH_LONG).show();
-//                return "no";
-//            }
-//        }
-//
-//        if (_varremarksID.equals("10")) {
-//            if(et_summary.getText().length()<12){
-//                et_summary.setError("कृपया मान्य आधार संख्या डाले");
-//                btn_update.setEnabled(false);
-//                return "no";
-//            }
-//        }
-//
-//        if (_varremarksID.equals("9")) {
-//
-//            if(et_summary.getText().length()<7){
-//                et_summary.setError("कृपया मान्य अकाउंट संख्या  डाले");
-//                btn_update.setEnabled(false);
-//                return "no";
-//            }
-//        }
-
-//        if ((et_fieldwheat.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया गेहूँ की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_field_makka.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया मक्का  की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_masoor.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया मसूर  की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_arhar.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया अरहर  की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_sugarcane.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया ईंख की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_potato.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया आलू की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_raisarso.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया राई सरसो की  बुवाई का क्षेत्र  डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_onion.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया प्याज की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if ((et_chana.getText().toString().trim().equals(""))) {
-//            Toast.makeText(EntryDetail.this, "कृपया चना  की  बुवाई का क्षेत्र डाले", Toast.LENGTH_LONG).show();
-//            return "no";
-//        }
-//        if(ConsumwerIsPresent.equalsIgnoreCase("Y")){
-//            if ((et_electricconsumernumber.getText().toString().trim().equals(""))) {
-//                Toast.makeText(EntryDetail.this, "बिजली उपभोक्ता संख्या डाले", Toast.LENGTH_LONG).show();
-//                return "no";
-//            }
-//        }
 
         return isvalid;
     }
@@ -2363,6 +2744,19 @@ public class EntryDetail extends AppCompatActivity {
                 values.put("swaghosana_sambandhit_id",_var_swaghosana_sambandhit_Id);
                 values.put("swaghosana_sambandhit_nm",_var_swaghosana_sambandhit_Nm);
                 values.put("swaghosana_signer_name",et_swaghossna_signer_nm.getText().toString());
+                values.put("Date",et_date.getText().toString());
+                values.put("aawedan_karta_Id",_var_aawedan_karta_Id);
+                values.put("aawedan_karta_Nm",_var_aawedan_karta_Nm);
+
+                values.put("Is_genhu",Is_genhu);
+                values.put("Is_makka",Is_makka);
+                values.put("Is_chana",Is_chana);
+                values.put("Is_arhar",Is_arhar);
+                values.put("Is_masur",Is_masur);
+                values.put("Is_rai",Is_rai);
+                values.put("Is_ikha",Is_ikha);
+                values.put("Is_onion",Is_onion);
+                values.put("Is_potato",Is_potato);
 
                 String[] whereArgs = new String[]{str_Reg_No};
                 if(_acceptOrReject.equalsIgnoreCase("A")) {
@@ -2491,6 +2885,139 @@ public class EntryDetail extends AppCompatActivity {
             ll_swaghoshana_aawedek_name.setVisibility(View.GONE);
             Lin_consumerIsPresent.setVisibility(View.GONE);
 
+            //new
+            if ((farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0"))) {
+                lin_gehu_rayti.setVisibility(View.GONE);
+                lin_gehu_rayti_edt.setVisibility(View.GONE);
+                chk_genhu.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_gehu_rayti.setVisibility(View.VISIBLE);
+                lin_gehu_rayti_edt.setVisibility(View.VISIBLE);
+                et_gehu_rayti.setText(farmerDetails.getGehu_raytti());
+                et_gehu_rayti.setEnabled(false);
+                chk_genhu.setVisibility(View.VISIBLE);
+                chk_genhu.setChecked(true);
+            }
+            if ((farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0"))) {
+                lin_makka_rayti.setVisibility(View.GONE);
+                lin_makka_rayti_edt.setVisibility(View.GONE);
+                chk_makka.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_makka_rayti.setVisibility(View.VISIBLE);
+                lin_makka_rayti_edt.setVisibility(View.VISIBLE);
+                et_makka_rayti.setText(farmerDetails.getMakka_raytti());
+                et_makka_rayti.setEnabled(false);
+                chk_makka.setVisibility(View.VISIBLE);
+                chk_makka.setChecked(true);
+            }
+            if ((farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0"))) {
+                lin_chana_rayti.setVisibility(View.GONE);
+                lin_chana_rayti_edt.setVisibility(View.GONE);
+                chk_chana.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_chana_rayti.setVisibility(View.VISIBLE);
+                lin_chana_rayti_edt.setVisibility(View.VISIBLE);
+                et_chana_rayti.setText(farmerDetails.getChana_raytti());
+                et_chana_rayti.setEnabled(false);
+                chk_chana.setVisibility(View.VISIBLE);
+                chk_chana.setChecked(true);
+            }
+            if ((farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0"))) {
+                lin_masur_rayti.setVisibility(View.GONE);
+                lin_masur_rayti_edt.setVisibility(View.GONE);
+                chk_masur.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_masur_rayti.setVisibility(View.VISIBLE);
+                lin_masur_rayti_edt.setVisibility(View.VISIBLE);
+                et_masur_rayti.setText(farmerDetails.getMasur_raytti());
+                et_masur_rayti.setEnabled(false);
+                chk_masur.setVisibility(View.VISIBLE);
+                chk_masur.setChecked(true);
+            }
+            if ((farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0")))
+            {
+                lin_arahar_rayti.setVisibility(View.GONE);
+                lin_arahar_rayti_edt.setVisibility(View.GONE);
+                chk_arhar.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_arahar_rayti.setVisibility(View.VISIBLE);
+                lin_arahar_rayti_edt.setVisibility(View.VISIBLE);
+                et_arahar_rayti.setText(farmerDetails.getArahar_raytti());
+                et_arahar_rayti.setEnabled(false);
+                chk_arhar.setVisibility(View.VISIBLE);
+                chk_arhar.setChecked(true);
+            }
+            if ((farmerDetails.getRae_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_raytti().equalsIgnoreCase("0"))) {
+                lin_Rae_raytti.setVisibility(View.GONE);
+                lin_Rae_raytti_edt.setVisibility(View.GONE);
+                chk_rai.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_Rae_raytti.setVisibility(View.VISIBLE);
+                lin_Rae_raytti_edt.setVisibility(View.VISIBLE);
+                et_rae_rayti.setText(farmerDetails.getRae_raytti());
+                et_rae_rayti.setEnabled(false);
+                chk_rai.setVisibility(View.VISIBLE);
+                chk_rai.setChecked(true);
+            }
+            if ((farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0"))) {
+                lin_ekh_rayti.setVisibility(View.GONE);
+                lin_ekh_rayti_edt.setVisibility(View.GONE);
+                chk_ikha.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_ekh_rayti.setVisibility(View.VISIBLE);
+                lin_ekh_rayti_edt.setVisibility(View.VISIBLE);
+                et_ekh_rayti.setText(farmerDetails.getEkh_raytti());
+                et_ekh_rayti.setEnabled(false);
+                chk_ikha.setVisibility(View.VISIBLE);
+                chk_ikha.setChecked(true);
+            }
+            if ((farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0")))
+            {
+                lin_pyaj_rayti.setVisibility(View.GONE);
+                lin_pyaj_rayti_edt.setVisibility(View.GONE);
+                chk_onion.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                lin_pyaj_rayti.setVisibility(View.VISIBLE);
+                lin_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+                et_pyaj_rayti.setText(farmerDetails.getPyaj_raytti());
+                et_pyaj_rayti.setEnabled(false);
+                chk_onion.setVisibility(View.VISIBLE);
+                chk_onion.setChecked(true);
+            }
+            if ((farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0")))
+            {
+                lin_aloo_rayti.setVisibility(View.GONE);
+                lin_aloo_rayti_edt.setVisibility(View.GONE);
+                chk_potato.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                lin_aloo_rayti.setVisibility(View.VISIBLE);
+                lin_aloo_rayti_edt.setVisibility(View.VISIBLE);
+                et_aloo_rayti.setText(farmerDetails.getAloo_raytti());
+                et_aloo_rayti.setEnabled(false);
+                chk_potato.setVisibility(View.VISIBLE);
+                chk_potato.setChecked(true);
+            }
+
         }
         //else if (farmerDetails.getTypeofFarmer().equalsIgnoreCase("गैर रैयत कृषक")) {
         else if (farmerDetails.getTypeofFarmer().equals("2")) {
@@ -2500,11 +3027,153 @@ public class EntryDetail extends AppCompatActivity {
             ll_khata_khesara.setVisibility(View.GONE);
             ll_lpc_related.setVisibility(View.GONE);
             ll_lpc_aawedan.setVisibility(View.GONE);
+            ll_date.setVisibility(View.GONE);
+            ll_lpc_aawedan_karta.setVisibility(View.GONE);
            // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
             tv_lpc_swagosna.setText("स्व-घोषणा के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.GONE);
             Lin_consumerIsPresent.setVisibility(View.VISIBLE);
             ll_swaghoshana_upload.setVisibility(View.VISIBLE);
+
+            //second
+
+            if ((farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_gehu_rayti.setVisibility(View.GONE);
+                lin_gair_gehu_rayti_edt.setVisibility(View.GONE);
+                chk_genhu.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                lin_gair_gehu_rayti.setVisibility(View.VISIBLE);
+                lin_gair_gehu_rayti_edt.setVisibility(View.VISIBLE);
+                et_gehu_gair_rayti.setText(farmerDetails.getGehu_gair_raytti());
+                et_gehu_gair_rayti.setEnabled(false);
+                chk_genhu.setVisibility(View.VISIBLE);
+                chk_genhu.setChecked(true);
+            }
+
+            if ((farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_makka_rayti.setVisibility(View.GONE);
+                lin_gair_makka_rayti_edt.setVisibility(View.GONE);
+                chk_makka.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                lin_gair_makka_rayti.setVisibility(View.VISIBLE);
+                lin_gair_makka_rayti_edt.setVisibility(View.VISIBLE);
+                et_makka_gair_rayti.setText(farmerDetails.getMakka_gair_raytti());
+                et_makka_gair_rayti.setEnabled(false);
+                chk_makka.setVisibility(View.VISIBLE);
+                chk_makka.setChecked(true);
+            }
+            if ((farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_chana_rayti.setVisibility(View.GONE);
+                lin_gair_chana_rayti_edt.setVisibility(View.GONE);
+                chk_chana.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                lin_gair_chana_rayti.setVisibility(View.VISIBLE);
+                lin_gair_chana_rayti_edt.setVisibility(View.VISIBLE);
+                et_chana_gair_rayti.setText(farmerDetails.getChana_gair_raytti());
+                et_chana_gair_rayti.setEnabled(false);
+                chk_chana.setVisibility(View.VISIBLE);
+                chk_chana.setChecked(true);
+            }
+            if ((farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0")))
+            {
+                lin_gair_masur_rayti.setVisibility(View.GONE);
+                lin_gair_masur_rayti_edt.setVisibility(View.GONE);
+                chk_masur.setVisibility(View.GONE);
+
+
+            }
+            else {
+                lin_gair_masur_rayti.setVisibility(View.VISIBLE);
+                lin_gair_masur_rayti_edt.setVisibility(View.VISIBLE);
+                et_masur_gair_rayti.setText(farmerDetails.getMasur_gair_raytti());
+                et_masur_gair_rayti.setEnabled(false);
+                chk_masur.setVisibility(View.VISIBLE);
+                chk_masur.setChecked(true);
+            }
+            if ((farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0"))) {
+
+                lin_gair_arahar_rayti.setVisibility(View.GONE);
+                lin_gair_arahar_rayti_edt.setVisibility(View.GONE);
+                chk_arhar.setVisibility(View.GONE);
+
+
+            }
+            else {
+                lin_gair_arahar_rayti.setVisibility(View.VISIBLE);
+                lin_gair_arahar_rayti_edt.setVisibility(View.VISIBLE);
+                et_arahar_gair_rayti.setText(farmerDetails.getArahar_gair_raytti());
+                et_arahar_gair_rayti.setEnabled(false);
+                chk_arhar.setVisibility(View.VISIBLE);
+                chk_arhar.setChecked(true);
+            }
+            if ((farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_Rae_raytti.setVisibility(View.GONE);
+                lin_gair_Rae_raytti_edt.setVisibility(View.GONE);
+                chk_rai.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_gair_Rae_raytti.setVisibility(View.VISIBLE);
+                lin_gair_Rae_raytti_edt.setVisibility(View.VISIBLE);
+                et_rae_gair_rayti.setText(farmerDetails.getRae_gair_raytti());
+                et_rae_gair_rayti.setEnabled(false);
+                chk_rai.setVisibility(View.VISIBLE);
+                chk_rai.setChecked(true);
+            }
+            if ((farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_ekh_rayti.setVisibility(View.GONE);
+                lin_gair_ekh_rayti_edt.setVisibility(View.GONE);
+                chk_ikha.setVisibility(View.GONE);
+
+            }
+            else {
+                lin_gair_ekh_rayti.setVisibility(View.VISIBLE);
+                lin_gair_ekh_rayti_edt.setVisibility(View.VISIBLE);
+                et_ekh_gair_rayti.setText(farmerDetails.getEkh_gair_raytti());
+                et_ekh_gair_rayti.setEnabled(false);
+                chk_ikha.setVisibility(View.VISIBLE);
+                chk_ikha.setChecked(true);
+            }
+            if ((farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_pyaj_rayti.setVisibility(View.GONE);
+                lin_gair_pyaj_rayti_edt.setVisibility(View.GONE);
+                chk_onion.setVisibility(View.GONE);
+
+
+            }
+            else {
+                lin_gair_pyaj_rayti.setVisibility(View.VISIBLE);
+                lin_gair_pyaj_rayti_edt.setVisibility(View.VISIBLE);
+                et_pyaj_gair_rayti.setText(farmerDetails.getPyaj_gair_raytti());
+                et_pyaj_gair_rayti.setEnabled(false);
+                chk_onion.setVisibility(View.VISIBLE);
+                chk_onion.setChecked(true);
+            }
+            if ((farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0"))) {
+                lin_gair_aloo_rayti.setVisibility(View.GONE);
+                lin_gair_aloo_rayti_edt.setVisibility(View.GONE);
+                chk_potato.setVisibility(View.GONE);
+
+
+            }
+            else {
+                lin_gair_aloo_rayti.setVisibility(View.VISIBLE);
+                lin_gair_aloo_rayti_edt.setVisibility(View.VISIBLE);
+                et_aloo_gair_rayti.setText(farmerDetails.getAloo_gair_raytti());
+                et_aloo_gair_rayti.setEnabled(false);
+                chk_potato.setVisibility(View.VISIBLE);
+                chk_potato.setChecked(true);
+            }
+
 
 
         }
@@ -2715,222 +3384,7 @@ public class EntryDetail extends AppCompatActivity {
             et_khestra_rakwa.setText(farmerDetails.getArea());
             et_khestra_rakwa.setEnabled(false);
         }
-        //new
-        if ((farmerDetails.getGehu_raytti().equalsIgnoreCase("0.00"))|| (farmerDetails.getGehu_raytti().equalsIgnoreCase("0"))) {
-            lin_gehu_rayti.setVisibility(View.GONE);
-            lin_gehu_rayti_edt.setVisibility(View.GONE);
 
-        }
-        else {
-            lin_gehu_rayti.setVisibility(View.VISIBLE);
-            lin_gehu_rayti_edt.setVisibility(View.VISIBLE);
-            et_gehu_rayti.setText(farmerDetails.getGehu_raytti());
-            et_gehu_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getMakka_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_raytti().equalsIgnoreCase("0"))) {
-            lin_makka_rayti.setVisibility(View.GONE);
-            lin_makka_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_makka_rayti.setVisibility(View.VISIBLE);
-            lin_makka_rayti_edt.setVisibility(View.VISIBLE);
-            et_makka_rayti.setText(farmerDetails.getMakka_raytti());
-            et_makka_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getChana_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_raytti().equalsIgnoreCase("0"))) {
-            lin_chana_rayti.setVisibility(View.GONE);
-            lin_chana_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_chana_rayti.setVisibility(View.VISIBLE);
-            lin_chana_rayti_edt.setVisibility(View.VISIBLE);
-            et_chana_rayti.setText(farmerDetails.getChana_raytti());
-            et_chana_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getMasur_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_raytti().equalsIgnoreCase("0"))) {
-            lin_masur_rayti.setVisibility(View.GONE);
-            lin_masur_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_masur_rayti.setVisibility(View.VISIBLE);
-            lin_masur_rayti_edt.setVisibility(View.VISIBLE);
-            et_masur_rayti.setText(farmerDetails.getMasur_raytti());
-            et_masur_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getArahar_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_raytti().equalsIgnoreCase("0")))
-        {
-            lin_arahar_rayti.setVisibility(View.GONE);
-            lin_arahar_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_arahar_rayti.setVisibility(View.VISIBLE);
-            lin_arahar_rayti_edt.setVisibility(View.VISIBLE);
-            et_arahar_rayti.setText(farmerDetails.getArahar_raytti());
-            et_arahar_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getRae_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_raytti().equalsIgnoreCase("0"))) {
-            lin_Rae_raytti.setVisibility(View.GONE);
-            lin_Rae_raytti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_Rae_raytti.setVisibility(View.VISIBLE);
-            lin_Rae_raytti_edt.setVisibility(View.VISIBLE);
-            et_rae_rayti.setText(farmerDetails.getRae_raytti());
-            et_rae_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getEkh_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_raytti().equalsIgnoreCase("0"))) {
-            lin_ekh_rayti.setVisibility(View.GONE);
-            lin_ekh_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_ekh_rayti.setVisibility(View.VISIBLE);
-            lin_ekh_rayti_edt.setVisibility(View.VISIBLE);
-            et_ekh_rayti.setText(farmerDetails.getEkh_raytti());
-            et_ekh_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getPyaj_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_raytti().equalsIgnoreCase("0")))
-        {
-            lin_pyaj_rayti.setVisibility(View.GONE);
-            lin_pyaj_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            lin_pyaj_rayti.setVisibility(View.VISIBLE);
-            lin_pyaj_rayti_edt.setVisibility(View.VISIBLE);
-            et_pyaj_rayti.setText(farmerDetails.getPyaj_raytti());
-            et_pyaj_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getAloo_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_raytti().equalsIgnoreCase("0")))
-        {
-            lin_aloo_rayti.setVisibility(View.GONE);
-            lin_aloo_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            lin_aloo_rayti.setVisibility(View.VISIBLE);
-            lin_aloo_rayti_edt.setVisibility(View.VISIBLE);
-            et_aloo_rayti.setText(farmerDetails.getAloo_raytti());
-            et_aloo_rayti.setEnabled(false);
-        }
-        //second
-
-        if ((farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getGehu_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_gehu_rayti.setVisibility(View.GONE);
-            lin_gair_gehu_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            lin_gair_gehu_rayti.setVisibility(View.VISIBLE);
-            lin_gair_gehu_rayti_edt.setVisibility(View.VISIBLE);
-            et_gehu_gair_rayti.setText(farmerDetails.getGehu_gair_raytti());
-            et_gehu_gair_rayti.setEnabled(false);
-        }
-
-        if ((farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMakka_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_makka_rayti.setVisibility(View.GONE);
-            lin_gair_makka_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            lin_gair_makka_rayti.setVisibility(View.VISIBLE);
-            lin_gair_makka_rayti_edt.setVisibility(View.VISIBLE);
-            et_makka_gair_rayti.setText(farmerDetails.getMakka_gair_raytti());
-            et_makka_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getChana_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_chana_rayti.setVisibility(View.GONE);
-            lin_gair_chana_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else
-        {
-            lin_gair_chana_rayti.setVisibility(View.VISIBLE);
-            lin_gair_chana_rayti_edt.setVisibility(View.VISIBLE);
-            et_chana_gair_rayti.setText(farmerDetails.getChana_gair_raytti());
-            et_chana_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getMasur_gair_raytti().equalsIgnoreCase("0")))
-        {
-            lin_gair_masur_rayti.setVisibility(View.GONE);
-            lin_gair_masur_rayti_edt.setVisibility(View.GONE);
-
-
-        }
-        else {
-            lin_gair_masur_rayti.setVisibility(View.VISIBLE);
-            lin_gair_masur_rayti_edt.setVisibility(View.VISIBLE);
-            et_masur_gair_rayti.setText(farmerDetails.getMasur_gair_raytti());
-            et_masur_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getArahar_gair_raytti().equalsIgnoreCase("0"))) {
-
-            lin_gair_arahar_rayti.setVisibility(View.GONE);
-            lin_gair_arahar_rayti_edt.setVisibility(View.GONE);
-
-
-        }
-        else {
-            lin_gair_arahar_rayti.setVisibility(View.VISIBLE);
-            lin_gair_arahar_rayti_edt.setVisibility(View.VISIBLE);
-            et_arahar_gair_rayti.setText(farmerDetails.getArahar_gair_raytti());
-            et_arahar_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getRae_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_Rae_raytti.setVisibility(View.GONE);
-            lin_gair_Rae_raytti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_gair_Rae_raytti.setVisibility(View.VISIBLE);
-            lin_gair_Rae_raytti_edt.setVisibility(View.VISIBLE);
-            et_rae_gair_rayti.setText(farmerDetails.getRae_gair_raytti());
-            et_rae_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getEkh_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_ekh_rayti.setVisibility(View.GONE);
-            lin_gair_ekh_rayti_edt.setVisibility(View.GONE);
-
-        }
-        else {
-            lin_gair_ekh_rayti.setVisibility(View.VISIBLE);
-            lin_gair_ekh_rayti_edt.setVisibility(View.VISIBLE);
-            et_ekh_gair_rayti.setText(farmerDetails.getEkh_gair_raytti());
-            et_ekh_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getPyaj_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_pyaj_rayti.setVisibility(View.GONE);
-            lin_gair_pyaj_rayti_edt.setVisibility(View.GONE);
-
-
-        }
-        else {
-            lin_gair_pyaj_rayti.setVisibility(View.VISIBLE);
-            lin_gair_pyaj_rayti_edt.setVisibility(View.VISIBLE);
-            et_pyaj_gair_rayti.setText(farmerDetails.getPyaj_gair_raytti());
-            et_pyaj_gair_rayti.setEnabled(false);
-        }
-        if ((farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0.00"))||(farmerDetails.getAloo_gair_raytti().equalsIgnoreCase("0"))) {
-            lin_gair_aloo_rayti.setVisibility(View.GONE);
-            lin_gair_aloo_rayti_edt.setVisibility(View.GONE);
-
-
-        }
-        else {
-            lin_gair_aloo_rayti.setVisibility(View.VISIBLE);
-            lin_gair_aloo_rayti_edt.setVisibility(View.VISIBLE);
-            et_aloo_gair_rayti.setText(farmerDetails.getAloo_gair_raytti());
-            et_aloo_gair_rayti.setEnabled(false);
-        }
 
 
 
@@ -3030,6 +3484,10 @@ public class EntryDetail extends AppCompatActivity {
                 String lpc_rltd_chk_Id = cursor.getString(cursor.getColumnIndex("lpc_rltd_chk_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("lpc_rltd_chk_Id")).toString();
                 String lpc_rltd_chk=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",lpc_rltd_chk_Id);
                 String lpc_awedn_chk_Id = cursor.getString(cursor.getColumnIndex("lpc_awedn_chk_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("lpc_awedn_chk_Id")).toString();
+
+                String aawedan_karta_Id = cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")).toString();
+                String aawedan_karta_Id_chk=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",aawedan_karta_Id);
+
                 String lpc_awedn_chk=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",lpc_awedn_chk_Id);
                 String ghosit_fasal_khti_Id = cursor.getString(cursor.getColumnIndex("ghosit_fasal_khti_Id")) == null ? "" : cursor.getString(cursor.getColumnIndex("ghosit_fasal_khti_Id")).toString();
                 String ghosit_fasal_khti=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",ghosit_fasal_khti_Id);
@@ -3039,6 +3497,8 @@ public class EntryDetail extends AppCompatActivity {
                 String aawedak_one_family=dbhelper.getNameFor("CheckList","ChkList_Id","Chklist_Nm",aawedak_one_family_Id);
                 String Str_aawedan_ghosit_rakwa = cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa")) == null ? "" : cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa")).toString();
                 String et_aawedan_ghosit_rakwa_two = cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa_two")) == null ? "" : cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa_two")).toString();
+
+                String StrDate = cursor.getString(cursor.getColumnIndex("Date")) == null ? "" : cursor.getString(cursor.getColumnIndex("Date")).toString();
 
                 String gehu_rayti = cursor.getString(cursor.getColumnIndex("gehu_rayti")) == null ? "" : cursor.getString(cursor.getColumnIndex("gehu_rayti")).toString();
                 String makka_rayti = cursor.getString(cursor.getColumnIndex("makka_rayti")) == null ? "" : cursor.getString(cursor.getColumnIndex("makka_rayti")).toString();
@@ -3066,6 +3526,15 @@ public class EntryDetail extends AppCompatActivity {
                 String _swaghosana_sambandhit_ID = cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_id")) == null ? "" : cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_id")).toString();
                 String _swaghosana_signer_nm = cursor.getString(cursor.getColumnIndex("swaghosana_signer_name")) == null ? "" : cursor.getString(cursor.getColumnIndex("swaghosana_signer_name")).toString();
                 // String COnsumbernumber = cursor.getString(cursor.getColumnIndex("electricity")) == null ? "" : cursor.getString(cursor.getColumnIndex("electricity")).toString();
+                String Is_Genhu_edt = cursor.getString(cursor.getColumnIndex("Is_genhu")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_genhu")).toString();
+                String Is_Makka_edt = cursor.getString(cursor.getColumnIndex("Is_makka")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_makka")).toString();
+                String Is_Chana_edt = cursor.getString(cursor.getColumnIndex("Is_chana")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_chana")).toString();
+                String Is_Masur_edt = cursor.getString(cursor.getColumnIndex("Is_masur")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_masur")).toString();
+                String Is_Arhar_edt = cursor.getString(cursor.getColumnIndex("Is_arhar")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_arhar")).toString();
+                String Is_Rai_edt = cursor.getString(cursor.getColumnIndex("Is_rai")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_rai")).toString();
+                String Is_Ikha_edt = cursor.getString(cursor.getColumnIndex("Is_ikha")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_ikha")).toString();
+                String Is_Onion_edt = cursor.getString(cursor.getColumnIndex("Is_onion")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_onion")).toString();
+                String Is_Potato_edt = cursor.getString(cursor.getColumnIndex("Is_potato")) == null ? "" : cursor.getString(cursor.getColumnIndex("Is_potato")).toString();
 
                 //  if (COnsumberpresent.equalsIgnoreCase("Y")) {
 //                if (ConsumwerIsPresent.equalsIgnoreCase("Y")) {
@@ -3180,8 +3649,12 @@ public class EntryDetail extends AppCompatActivity {
                         sp_lpc_related.setSelection(((ArrayAdapter<String>) sp_lpc_related.getAdapter()).getPosition(lpc_rltd_chk));
                         if (lpc_rltd_chk_Id.equalsIgnoreCase("1")) {
                             sp_lpc_aawedan.setSelection(((ArrayAdapter<String>) sp_lpc_aawedan.getAdapter()).getPosition(lpc_awedn_chk));
+                            sp_lpc_aawedan_karta.setSelection(((ArrayAdapter<String>) sp_lpc_aawedan_karta.getAdapter()).getPosition(aawedan_karta_Id_chk));
+                            et_date.setText(StrDate);
                         } else {
                             sp_lpc_aawedan.setSelection(0);
+                            sp_lpc_aawedan_karta.setSelection(0);
+                            et_date.setText("");
                         }
                         sp_ghosit_fasal_kheti.setSelection(((ArrayAdapter<String>) sp_ghosit_fasal_kheti.getAdapter()).getPosition(ghosit_fasal_khti));
                         if (ghosit_fasal_khti_Id.equalsIgnoreCase("1")) {
@@ -3198,6 +3671,69 @@ public class EntryDetail extends AppCompatActivity {
                                 edt_ekh_rayti.setText(ekh_rayti);
                                 edt_pyaj_rayti.setText(pyaj_rayti);
                                 edt_aloo_rayti.setText(aloo_rayti);
+                                if (Is_Genhu_edt.equalsIgnoreCase("Y")) {
+                                    chk_genhu.setChecked(true);
+                                    Is_genhu = "Y";
+                                } else {
+                                    chk_genhu.setChecked(false);
+                                    Is_genhu = "N";
+                                }
+                                if (Is_Makka_edt.equalsIgnoreCase("Y")) {
+                                    chk_makka.setChecked(true);
+                                    Is_makka = "Y";
+                                } else {
+                                    chk_makka.setChecked(false);
+                                    Is_makka = "N";
+                                }
+                                if (Is_Chana_edt.equalsIgnoreCase("Y")) {
+                                    chk_chana.setChecked(true);
+                                    Is_chana = "Y";
+                                } else {
+                                    chk_chana.setChecked(false);
+                                    Is_chana = "N";
+                                }
+                                if (Is_Masur_edt.equalsIgnoreCase("Y")) {
+                                    chk_masur.setChecked(true);
+                                    Is_masur = "Y";
+                                } else {
+                                    chk_masur.setChecked(false);
+                                    Is_masur = "N";
+                                }
+                                if (Is_Arhar_edt.equalsIgnoreCase("Y")) {
+                                    chk_arhar.setChecked(true);
+                                    Is_arhar = "Y";
+                                } else {
+                                    chk_arhar.setChecked(false);
+                                    Is_arhar = "N";
+                                }
+                                if (Is_Rai_edt.equalsIgnoreCase("Y")) {
+                                    chk_rai.setChecked(true);
+                                    Is_rai = "Y";
+                                } else {
+                                    chk_rai.setChecked(false);
+                                    Is_rai = "N";
+                                }
+                                if (Is_Ikha_edt.equalsIgnoreCase("Y")) {
+                                    chk_ikha.setChecked(true);
+                                    Is_ikha = "Y";
+                                } else {
+                                    chk_ikha.setChecked(false);
+                                    Is_ikha = "N";
+                                }
+                                if (Is_Onion_edt.equalsIgnoreCase("Y")) {
+                                    chk_onion.setChecked(true);
+                                    Is_onion = "Y";
+                                } else {
+                                    chk_onion.setChecked(false);
+                                    Is_onion = "N";
+                                }
+                                if (Is_Potato_edt.equalsIgnoreCase("Y")) {
+                                    chk_potato.setChecked(true);
+                                    Is_potato = "Y";
+                                } else {
+                                    chk_potato.setChecked(false);
+                                    Is_potato = "N";
+                                }
                             } else {
                                 //et_aawedan_ghosit_rakwa.setText("");
                                 edt_gehu_rayti.setText("");
@@ -3231,6 +3767,69 @@ public class EntryDetail extends AppCompatActivity {
                                 edt_ekh_gair_rayti.setText(ekh_gair_rayti);
                                 edt_pyaj_gair_rayti.setText(pyaj_gair_rayti);
                                 edt_aloo_gair_rayti.setText(aloo_gair_rayti);
+                                if (Is_Genhu_edt.equalsIgnoreCase("Y")) {
+                                    chk_genhu.setChecked(true);
+                                    Is_genhu = "Y";
+                                } else {
+                                    chk_genhu.setChecked(false);
+                                    Is_genhu = "N";
+                                }
+                                if (Is_Makka_edt.equalsIgnoreCase("Y")) {
+                                    chk_makka.setChecked(true);
+                                    Is_makka = "Y";
+                                } else {
+                                    chk_makka.setChecked(false);
+                                    Is_makka = "N";
+                                }
+                                if (Is_Chana_edt.equalsIgnoreCase("Y")) {
+                                    chk_chana.setChecked(true);
+                                    Is_chana = "Y";
+                                } else {
+                                    chk_chana.setChecked(false);
+                                    Is_chana = "N";
+                                }
+                                if (Is_Masur_edt.equalsIgnoreCase("Y")) {
+                                    chk_masur.setChecked(true);
+                                    Is_masur = "Y";
+                                } else {
+                                    chk_masur.setChecked(false);
+                                    Is_masur = "N";
+                                }
+                                if (Is_Arhar_edt.equalsIgnoreCase("Y")) {
+                                    chk_arhar.setChecked(true);
+                                    Is_arhar = "Y";
+                                } else {
+                                    chk_arhar.setChecked(false);
+                                    Is_arhar = "N";
+                                }
+                                if (Is_Rai_edt.equalsIgnoreCase("Y")) {
+                                    chk_rai.setChecked(true);
+                                    Is_rai = "Y";
+                                } else {
+                                    chk_rai.setChecked(false);
+                                    Is_rai = "N";
+                                }
+                                if (Is_Ikha_edt.equalsIgnoreCase("Y")) {
+                                    chk_ikha.setChecked(true);
+                                    Is_ikha = "Y";
+                                } else {
+                                    chk_ikha.setChecked(false);
+                                    Is_ikha = "N";
+                                }
+                                if (Is_Onion_edt.equalsIgnoreCase("Y")) {
+                                    chk_onion.setChecked(true);
+                                    Is_onion = "Y";
+                                } else {
+                                    chk_onion.setChecked(false);
+                                    Is_onion = "N";
+                                }
+                                if (Is_Potato_edt.equalsIgnoreCase("Y")) {
+                                    chk_potato.setChecked(true);
+                                    Is_potato = "Y";
+                                } else {
+                                    chk_potato.setChecked(false);
+                                    Is_potato = "N";
+                                }
                             } else {
                                 //et_aawedan_ghosit_rakwa_2.setText("");
                                 edt_gehu_gair_rayti.setText("");
@@ -3254,10 +3853,14 @@ public class EntryDetail extends AppCompatActivity {
                         if (lpc_rltd_chk_Id.equalsIgnoreCase("1"))
                         {
                             sp_lpc_aawedan.setSelection(((ArrayAdapter<String>) sp_lpc_aawedan.getAdapter()).getPosition(lpc_awedn_chk));
+                            sp_lpc_aawedan_karta.setSelection(((ArrayAdapter<String>) sp_lpc_aawedan_karta.getAdapter()).getPosition(aawedan_karta_Id_chk));
+                            et_date.setText(StrDate);
                         }
                         else
                         {
                             sp_lpc_aawedan.setSelection(0);
+                            sp_lpc_aawedan_karta.setSelection(0);
+                            et_date.setText("");
                         }
                         sp_ghosit_fasal_kheti.setSelection(((ArrayAdapter<String>) sp_ghosit_fasal_kheti.getAdapter()).getPosition(ghosit_fasal_khti));
                         if (ghosit_fasal_khti_Id.equalsIgnoreCase("1"))
@@ -3287,6 +3890,69 @@ public class EntryDetail extends AppCompatActivity {
                                 edt_aloo_gair_rayti.setText(aloo_gair_rayti);
                                 //et_aawedan_ghosit_rakwa.setText(Str_aawedan_ghosit_rakwa);
                                 //et_aawedan_ghosit_rakwa_2.setText(et_aawedan_ghosit_rakwa_two);
+                                if (Is_Genhu_edt.equalsIgnoreCase("Y")) {
+                                    chk_genhu.setChecked(true);
+                                    Is_genhu = "Y";
+                                } else {
+                                    chk_genhu.setChecked(false);
+                                    Is_genhu = "N";
+                                }
+                                if (Is_Makka_edt.equalsIgnoreCase("Y")) {
+                                    chk_makka.setChecked(true);
+                                    Is_makka = "Y";
+                                } else {
+                                    chk_makka.setChecked(false);
+                                    Is_makka = "N";
+                                }
+                                if (Is_Chana_edt.equalsIgnoreCase("Y")) {
+                                    chk_chana.setChecked(true);
+                                    Is_chana = "Y";
+                                } else {
+                                    chk_chana.setChecked(false);
+                                    Is_chana = "N";
+                                }
+                                if (Is_Masur_edt.equalsIgnoreCase("Y")) {
+                                    chk_masur.setChecked(true);
+                                    Is_masur = "Y";
+                                } else {
+                                    chk_masur.setChecked(false);
+                                    Is_masur = "N";
+                                }
+                                if (Is_Arhar_edt.equalsIgnoreCase("Y")) {
+                                    chk_arhar.setChecked(true);
+                                    Is_arhar = "Y";
+                                } else {
+                                    chk_arhar.setChecked(false);
+                                    Is_arhar = "N";
+                                }
+                                if (Is_Rai_edt.equalsIgnoreCase("Y")) {
+                                    chk_rai.setChecked(true);
+                                    Is_rai = "Y";
+                                } else {
+                                    chk_rai.setChecked(false);
+                                    Is_rai = "N";
+                                }
+                                if (Is_Ikha_edt.equalsIgnoreCase("Y")) {
+                                    chk_ikha.setChecked(true);
+                                    Is_ikha = "Y";
+                                } else {
+                                    chk_ikha.setChecked(false);
+                                    Is_ikha = "N";
+                                }
+                                if (Is_Onion_edt.equalsIgnoreCase("Y")) {
+                                    chk_onion.setChecked(true);
+                                    Is_onion = "Y";
+                                } else {
+                                    chk_onion.setChecked(false);
+                                    Is_onion = "N";
+                                }
+                                if (Is_Potato_edt.equalsIgnoreCase("Y")) {
+                                    chk_potato.setChecked(true);
+                                    Is_potato = "Y";
+                                } else {
+                                    chk_potato.setChecked(false);
+                                    Is_potato = "N";
+                                }
                             }
                             else
                             {
@@ -3327,11 +3993,13 @@ public class EntryDetail extends AppCompatActivity {
                     //  ll_kinke_dwara_Satyapan1.setVisibility(View.GONE);
                     sp_lpc_related.setSelection(0);
                     sp_lpc_aawedan.setSelection(0);
+                    sp_lpc_aawedan_karta.setSelection(0);
                     sp_aawedan_ghosit_rakwa.setSelection(0);
                     et_aawedan_ghosit_rakwa.setText("");
                     sp_aawedak_one_family.setSelection(0);
                     sp_ghosit_fasal_kheti.setSelection(0);
                     et_aawedan_ghosit_rakwa_2.setText("");
+                    et_date.setText("");
                 }
 
                 if (cheak.equalsIgnoreCase("Y")) {
@@ -3473,6 +4141,7 @@ public class EntryDetail extends AppCompatActivity {
         sp_aawedak_present.setAdapter(checklistadapter);
         sp_lpc_related.setAdapter(checklistadapter);
         sp_lpc_aawedan.setAdapter(checklistadapter);
+        sp_lpc_aawedan_karta.setAdapter(checklistadapter);
         sp_ghosit_fasal_kheti.setAdapter(checklistadapter);
         sp_electric.setAdapter(checklistadapter);
         sp_electric_avail.setAdapter(checklistadapter);
@@ -3504,6 +4173,8 @@ public class EntryDetail extends AppCompatActivity {
                 ll_khata_khesara.setVisibility(View.GONE);
                 ll_lpc_related.setVisibility(View.GONE);
                 ll_lpc_aawedan.setVisibility(View.GONE);
+                ll_date.setVisibility(View.GONE);
+                ll_lpc_aawedan_karta.setVisibility(View.GONE);
                 ISConsumerNumberExistRecord();
 
             }

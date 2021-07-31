@@ -3006,7 +3006,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LPC है एवं संबंधित अंचल कार्यालय से निर्गत है ? *"
+                    android:text="क्या आवेदनकर्ता द्वारा अद्यतन(Current) LPC अपलोड है ? *"
                     android:textStyle="bold"
                     android:textSize="15dp"
                     android:textColor="#000000"/>
@@ -3022,6 +3022,93 @@
 
 
             </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_lpc_aawedan_karta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="क्या LPC आवेदनकर्ता के नाम से है ? *"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="#000000"/>
+                    <Spinner
+                        android:id="@+id/sp_lpc_aawedan_karta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_bg"
+                        android:imeOptions="actionUnspecified"
+                        android:paddingRight="20dp"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#43D305" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/ll_date"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="0dp">
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp">
+
+                        <TextView
+                            android:id="@+id/tv_dob"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" प्रखंड कार्यालय से LPC निर्गत होने  की तिथि"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:text="*"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edittext_style"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/img_cal1"
+                            android:layout_width="35dp"
+                            android:layout_height="38dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/calendaricon"/>
+                        <View
+                            android:layout_width="1dp"
+                            android:background="#eee"
+                            android:layout_height="37dp"/>
+                        <TextView
+                            android:id="@+id/et_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="57dp"
+                            android:layout_marginLeft="57dp"
+                            android:maxLength="12"
+                            android:textColor="#222222"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+                </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_lpc_aawedan"
                 android:layout_width="match_parent"
@@ -3134,6 +3221,119 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:maxLength="10"/>
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/ll_chk"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_genhu"
+                        android:text="गेहूँ"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_makka"
+                        android:text="मक्का"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_chana"
+                        android:text="चना"/>
+
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_masur"
+                        android:text="मसूर"/>
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@drawable/cb_selector"
+                            android:padding="5dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/chk_rai"
+                            android:text="राई"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_arhar"
+                        android:text="अरहर"/>
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_ikha"
+                        android:text="ईख"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_onion"
+                        android:text="प्याज"/>
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/cb_selector"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chk_potato"
+                        android:text="आलू"/>
+
+                </LinearLayout>
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
