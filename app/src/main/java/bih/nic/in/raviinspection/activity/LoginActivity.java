@@ -348,12 +348,12 @@ public class LoginActivity extends Activity {
                 this.dialog.dismiss();
                 final EditText userPass = (EditText) findViewById(R.id.et_Password);
                 final AutoCompleteTextView userName = (AutoCompleteTextView) findViewById(R.id.et_User_Id);
-                if(imei.equalsIgnoreCase(imei)) {
-                    imei = result.getIMEI();
-                    //imei = "862183044263136";
-                    //imei = "359376097764329";
-                    //imei = "866778040112652";
-                }
+//                if(imei.equalsIgnoreCase(imei)) {
+//                    imei = result.getIMEI();
+//                    //imei = "862183044263136";
+//                    //imei = "359376097764329";
+//                    //imei = "866778040112652";
+//                }
 
                 if (result == null|| result.is_isAuthenticated() == false )
                 {

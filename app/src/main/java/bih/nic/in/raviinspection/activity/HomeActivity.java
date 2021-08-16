@@ -187,10 +187,18 @@ public class HomeActivity extends AppCompatActivity {
 
                             if (localDBHelper.getUploadCommunityCount() > 0) {
                                 List<FarmerDetails> locDatas = localDBHelper.getAllDataListCommunityData();
-                                Log.d("Datainsecondtable",""+locDatas.size());
-                                for (FarmerDetails cn : locDatas) {
-                                    new uploadingLocData(cn).execute();
+                                // Log.d("Datainsecondtable",""+locDatas.size());
+                                if(locDatas!=null)
+                                {
+                                    if (locDatas.size()>0)
+                                    {
+                                        for (FarmerDetails cn : locDatas) {
+                                            new uploadingLocData(cn).execute();
+                                        }
+                                    }
+
                                 }
+
                             } else {
                                 Toast.makeText(getApplicationContext(), "कोई रिकॉर्ड नहीं मिला",
                                         Toast.LENGTH_SHORT).show();

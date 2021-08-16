@@ -579,6 +579,7 @@ public class EntryDetail extends AppCompatActivity {
 
             }
         });
+
         chk_potato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -626,12 +627,11 @@ public class EntryDetail extends AppCompatActivity {
 
         tv_swaghosana_signer_nm =  findViewById(R.id.tv_swaghosana_signer_nm);
         //ll_kinke_dwara_Satyapan1 =  findViewById(R.id.ll_kinke_dwara_Satyapan1);
-        et_swaghossna_signer_nm =  findViewById(R.id.et_swaghossna_signer_nm);
+        et_swaghossna_signer_nm = (EditText) findViewById(R.id.et_swaghossna_signer_nm);
         et_swaghossna_signer_nm.addTextChangedListener(inputTextWatcher1);
 
         aawedakAbsent = new ArrayAdapter(this, R.layout.dropdownlist, aawedak_absent);
         sp_aawedak_absent.setAdapter(aawedakAbsent);
-
 
         ll_swaghoshana_sambandhit.setVisibility(View.GONE);
         ll_swaghosana_sambandhit_nm.setVisibility(View.GONE);
@@ -652,7 +652,7 @@ public class EntryDetail extends AppCompatActivity {
         img_farmerphoto=(ImageView)findViewById(R.id.img_farmerphoto);
 
         // rg_ConsumwerIsPresent=(RadioGroup) findViewById(R.id.rg_ConsumwerIsPresent);
-          Lin_consumerIsPresent = (LinearLayout) findViewById(R.id.Lin_consumerIsPresent);
+        Lin_consumerIsPresent = (LinearLayout) findViewById(R.id.Lin_consumerIsPresent);
         Lin_consumerIsPresent.setVisibility(View.GONE);
         setLocaldata();
         //  tv_remarks.setVisibility(View.GONE);
@@ -916,12 +916,14 @@ public class EntryDetail extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
                 // TODO Auto-generated method stub
 
-                if (arg2 > 0) {
+                if (arg2 > 0)
+                {
                     Checklist wrd = ChecklistList.get(arg2 - 1);
                     _var_aawedak_present_Id =  wrd.getChecklist_Id();
                     _var_aawedak_present_Nm =  wrd.getChecklist_Name();
 
-                    if(_var_aawedak_present_Id.equals("1")){
+                    if(_var_aawedak_present_Id.equals("1"))
+                    {
                         ll_aawedak_absent.setVisibility(View.GONE);
                         ll_kinke_dwara_Satyapan.setVisibility(View.VISIBLE);
                     }
@@ -984,7 +986,7 @@ public class EntryDetail extends AppCompatActivity {
                         sevikaabsent_Id = "7";
                         ll_kinke_dwara_Satyapan.setVisibility(View.GONE);
                         //  ll_kinke_dwara_Satyapan1.setVisibility(View.GONE);
-                       // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+                        // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -3029,7 +3031,7 @@ public class EntryDetail extends AppCompatActivity {
             ll_lpc_aawedan.setVisibility(View.GONE);
             ll_date.setVisibility(View.GONE);
             ll_lpc_aawedan_karta.setVisibility(View.GONE);
-           // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+            // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
             tv_lpc_swagosna.setText("स्व-घोषणा के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.GONE);
             Lin_consumerIsPresent.setVisibility(View.VISIBLE);
@@ -3184,7 +3186,7 @@ public class EntryDetail extends AppCompatActivity {
             ll_khata_khesara.setVisibility(View.GONE);
             ll_lpc_related.setVisibility(View.VISIBLE);
             ll_lpc_aawedan.setVisibility(View.GONE);
-           // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
+            // ll_swaghoshana_sambandhit.setVisibility(View.VISIBLE);
             tv_lpc_swagosna.setText("LPC एवं स्व-घोषणा के अनुसार जमीन का विवरण");
             bhu_swamitwa.setVisibility(View.VISIBLE);
             Lin_consumerIsPresent.setVisibility(View.GONE);

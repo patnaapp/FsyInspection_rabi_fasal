@@ -196,7 +196,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-       db.execSQL("CREATE TABLE IF NOT EXISTS CheckList( ChkList_Id TEXT, Chklist_Nm TEXT );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS CheckList( ChkList_Id TEXT, Chklist_Nm TEXT );");
     }
 
     @Override
@@ -212,7 +212,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     db.execSQL("ALTER TABLE FarmerDetails ADD COLUMN Nibandhan_Sankhya TEXT");
                     db.execSQL("ALTER TABLE FarmerDetails ADD COLUMN Household_Id TEXT");
 
-                   // db.execSQL("CREATE TABLE Districts( DistCode TEXT, DistName TEXT );");
+                    // db.execSQL("CREATE TABLE Districts( DistCode TEXT, DistName TEXT );");
                     //db.execSQL("CREATE TABLE Blocks( DistCode TEXT, BlockCode TEXT, BlockName TEXT );");
 
                     db.execSQL("ALTER TABLE Panchayat ADD COLUMN BlockCode TEXT");
@@ -247,10 +247,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
         }
         catch(Exception e)
-            {
-                Log.e("EXCEPTION", e.getLocalizedMessage());
-                Log.e("EXCEPTION", e.getMessage());
-            }
+        {
+            Log.e("EXCEPTION", e.getLocalizedMessage());
+            Log.e("EXCEPTION", e.getMessage());
+        }
 
 
 
@@ -361,7 +361,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             // CREATE TABLE "BankList" ( `BankId` TEXT, `BankName` TEXT, `BankType` TEXT )
 
             SQLiteDatabase db = this.getWritableDatabase();
-           // db.delete("Panchayat",null,null);
+            // db.delete("Panchayat",null,null);
             for (Panchayat panchayat : result) {
 
                 ContentValues values = new ContentValues();
@@ -421,7 +421,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // return plantationList;
     }
 
-//    public ArrayList<Panchayat> getPanchayatList(String userId) {
+    //    public ArrayList<Panchayat> getPanchayatList(String userId) {
 //
 //        //String UserId;
 //        //UserId= CommonPref.getUserDetails(myContext).getUserID();
@@ -506,8 +506,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cur=null;
 
-                String[] whereArgs = new String[] {panchayatID,UserId };
-                cur = db.rawQuery("Select * from FarmerDetails where PanchayatCode= '"+panchayatID.trim()+"' and User_ID= '"+UserId.trim().toLowerCase()+"'", null);
+            String[] whereArgs = new String[] {panchayatID,UserId };
+            cur = db.rawQuery("Select * from FarmerDetails where PanchayatCode= '"+panchayatID.trim()+"' and User_ID= '"+UserId.trim().toLowerCase()+"'", null);
 
             x = cur.getCount();
             cur.close();
@@ -545,7 +545,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             //db.delete("tablename","id=? and name=?",new String[]{"1","jack"});
-          // long d= db.delete("FarmerDetails", "User_ID=? and PanchayatCode=?", new String[]{userid.trim(),panchayatcode.trim()});
+            // long d= db.delete("FarmerDetails", "User_ID=? and PanchayatCode=?", new String[]{userid.trim(),panchayatcode.trim()});
 
             for (FarmerDetails state : result) {
 
@@ -658,8 +658,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Cursor cur=null;
             SQLiteDatabase db = this.getReadableDatabase();
 
-                cur = db.rawQuery(
-                        "Select * from Panchayat", null);
+            cur = db.rawQuery(
+                    "Select * from Panchayat", null);
             if (cur.moveToNext()) {
                 progress = setProgressData(cur);
             }
@@ -699,9 +699,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             else{
                 cur = db.rawQuery("Select FarmerName,FarmerFatherName,MobileNumber,PanchayatCode,RegistrationNO,User_ID from FarmerDetails where User_ID = '"+ userid.toLowerCase() +"'",null);
-            //cur = db
-                   // .rawQuery("Select * from FarmerDetails where User_Id = 'bin755'",null);
-           }
+                //cur = db
+                // .rawQuery("Select * from FarmerDetails where User_Id = 'bin755'",null);
+            }
 
             int i =cur.getCount();
             while (cur.moveToNext()) {
@@ -765,7 +765,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     public ArrayList<Panchayat> getpanchayatListOfUlbCode(String userID) {
 
-       // String UlbCode = PreferenceManager.getDefaultSharedPreferences(myContext).getString("UlbCode", "");
+        // String UlbCode = PreferenceManager.getDefaultSharedPreferences(myContext).getString("UlbCode", "");
         //UlbCode= CommonPref.getUserDetails(myContext).get_ULBCode();
         ArrayList<Panchayat> datawardList = new ArrayList<Panchayat>();
         try {
@@ -848,8 +848,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Cursor cur=null;
             SQLiteDatabase db = this.getReadableDatabase();
 
-                cur = db.rawQuery(
-                        "Select * from FarmerDetails where RegistrationNO='" + userid + "'", null);
+            cur = db.rawQuery(
+                    "Select * from FarmerDetails where RegistrationNO='" + userid + "'", null);
             if (cur.moveToNext()) {
                 progress = setProgressData_all(cur);
             }
@@ -956,13 +956,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<FarmerDetails> getAllDataListCommunityData() {
         List<FarmerDetails> dataList = new ArrayList<FarmerDetails>();
         try{
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select RegNo,Status,Summary,RemarksCode,RemarksName,User_Id,Latitude,Longitude,Pic1landLat,Pic1landLong,Pic2landLat,Pic2landLong,aawedak_present,aawedak_absent,lpc_rltd_chk_Id,lpc_awedn_chk_Id,ghosit_fasal_khti_Id,aawedan_ghosit_rakwa_Id,aawedak_one_family_Id,gehu_rayti,makka_rayti,chana_rayti,masur_rayti,arahar_rayti,rae_rayti,ekh_rayti,pyaj_rayti,aloo_rayti,gehu_gair_rayti,makka_gair_rayti,chana_gair_rayti,masur_gair_rayti,arahar_gair_rayti,rae_gair_rayti,ekh_gair_rayti,pyaj_gair_rayti,aloo_gair_rayti,swaghosana_sambandhit_id,swaghosana_sambandhit_nm,swaghosana_signer_name from InsertFarmer ", null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            // Cursor cursor = db.rawQuery("Select TypeofFarmer,RegNo,Status,Summary,RemarksCode,RemarksName,User_Id,Latitude,Longitude,Pic1landLat,Pic1landLong,Pic2landLat,Pic2landLong,aawedak_present,aawedak_absent,lpc_rltd_chk_Id,lpc_awedn_chk_Id,ghosit_fasal_khti_Id,aawedan_ghosit_rakwa_Id,aawedak_one_family_Id,gehu_rayti,makka_rayti,chana_rayti,masur_rayti,arahar_rayti,rae_rayti,ekh_rayti,pyaj_rayti,aloo_rayti,gehu_gair_rayti,makka_gair_rayti,chana_gair_rayti,masur_gair_rayti,arahar_gair_rayti,rae_gair_rayti,ekh_gair_rayti,pyaj_gair_rayti,aloo_gair_rayti,swaghosana_sambandhit_id,swaghosana_sambandhit_nm,swaghosana_signer_name,electricity,electric_avail_Id,electric_avail_Nm,electric_Id,electric_Nm,swaghoshana_upload_Id,swaghoshana_aawedek_name_Id from InsertFarmer ", null);
+            Cursor cursor = db.rawQuery("Select  Summary , Status , RegNo , EntryDate , UploadDate , Latitude , Longitude , User_Id ,  Pic1landLat , Pic1landLong , Pic2landLat , Pic2landLong , RemarksCode , RemarksName , wheatfield , makkafield , masoorfield , arharfield , sugarcanefield , potatofield , raisarsofield , onionfield , chanafield , electricity , ConsumerNumberIsPresent , lpc_rltd_chk_Id , lpc_awedn_chk_Id , ghosit_fasal_khti_Id , aawedan_ghosit_rakwa_Id , aawedak_one_family_Id , et_aawedan_ghosit_rakwa , et_aawedan_ghosit_rakwa_two , Cheak , aawedak_present , aawedak_absent , gehu_rayti , makka_rayti , chana_rayti , masur_rayti , arahar_rayti , rae_rayti , ekh_rayti , pyaj_rayti , aloo_rayti , gehu_gair_rayti , makka_gair_rayti , chana_gair_rayti , masur_gair_rayti , arahar_gair_rayti , rae_gair_rayti , pyaj_gair_rayti , aloo_gair_rayti , ekh_gair_rayti , swaghosana_sambandhit_id , swaghosana_sambandhit_nm , swaghosana_signer_name , TypeofFarmer , swaghoshana_upload_Id , swaghoshana_upload_Nm , swaghoshana_aawedek_name_Id , swaghoshana_aawedek_name_Nm , electric_Id , electric_Nm , electric_avail_Id , electric_avail_Nm , Is_genhu , Is_makka , Is_chana , Is_arhar , Is_masur , Is_rai , Is_ikha , Is_onion , Is_potato , Date , aawedan_karta_Id , aawedan_karta_Nm  from InsertFarmer ", null);
 
-        if (cursor.moveToFirst()) {
-           // do {
+            if (cursor.moveToFirst()) {
+                // do {
                 FarmerDetails data = new FarmerDetails();
-            data.setTypeofFarmer(cursor.getString(cursor.getColumnIndex("TypeofFarmer")));
+                data.setTypeofFarmer(cursor.getString(cursor.getColumnIndex("TypeofFarmer")));
                 data.setRegistrationNO(cursor.getString(cursor.getColumnIndex("RegNo")));
                 data.setStatus(cursor.getString(cursor.getColumnIndex("Status")));
                 data.setSummary(cursor.getString(cursor.getColumnIndex("Summary")));
@@ -990,14 +991,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //                data.setEt_chana(cursor.getString(cursor.getColumnIndex("chanafield")));
 //                data.setElectricity(cursor.getString(cursor.getColumnIndex("electricity")));
 
-            data.setElectricity(cursor.getString(cursor.getColumnIndex("electricity")));
-            data.setElectric_avail_id(cursor.getString(cursor.getColumnIndex("electric_avail_Id")));
-            data.setElectric_avail_nm(cursor.getString(cursor.getColumnIndex("electric_avail_Nm")));
-            data.setElectric_id(cursor.getString(cursor.getColumnIndex("electric_Id")));
-            data.setElectric_nm(cursor.getString(cursor.getColumnIndex("electric_Nm")));
+                data.setElectricity(cursor.getString(cursor.getColumnIndex("electricity")));
+                data.setElectric_avail_id(cursor.getString(cursor.getColumnIndex("electric_avail_Id")));
+                data.setElectric_avail_nm(cursor.getString(cursor.getColumnIndex("electric_avail_Nm")));
+                data.setElectric_id(cursor.getString(cursor.getColumnIndex("electric_Id")));
+                data.setElectric_nm(cursor.getString(cursor.getColumnIndex("electric_Nm")));
 
-            data.setSwaghona_upload(cursor.getString(cursor.getColumnIndex("swaghoshana_upload_Id")));//swaghona upload hai
-            data.setSwaghona_patra_aawedakrta(cursor.getString(cursor.getColumnIndex("swaghoshana_aawedek_name_Id")));//swaghona patra aawedakrta ke naam se hai
+                data.setSwaghona_upload(cursor.getString(cursor.getColumnIndex("swaghoshana_upload_Id")));//swaghona upload hai
+                data.setSwaghona_patra_aawedakrta(cursor.getString(cursor.getColumnIndex("swaghoshana_aawedek_name_Id")));//swaghona patra aawedakrta ke naam se hai
 
                 data.setAawedak_accept(cursor.getString(cursor.getColumnIndex("aawedak_present")));
                 data.setAawedak_reject(cursor.getString(cursor.getColumnIndex("aawedak_absent")));
@@ -1046,11 +1047,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 data.setIs_onion(cursor.getString(cursor.getColumnIndex("Is_onion")));
                 data.setIs_potato(cursor.getString(cursor.getColumnIndex("Is_potato")));
 
-               // data.setPhoto1(cursor.isNull(cursor.getColumnIndex("Photo1")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo1")), Base64.NO_WRAP) : "");
+                // data.setPhoto1(cursor.isNull(cursor.getColumnIndex("Photo1")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo1")), Base64.NO_WRAP) : "");
                 //data.setPhoto2(cursor.isNull(cursor.getColumnIndex("Photo2")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo2")), Base64.NO_WRAP) : "");
                 //data.setPhoto3(cursor.isNull(cursor.getColumnIndex("Photo3")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo3")), Base64.NO_WRAP) : "");
                 //data.setPhoto4(cursor.isNull(cursor.getColumnIndex("Photo4")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo4")), Base64.NO_WRAP) : "");
-               // data.setPhoto5(cursor.isNull(cursor.getColumnIndex("Photo5")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo5")), Base64.NO_WRAP) : "");
+                // data.setPhoto5(cursor.isNull(cursor.getColumnIndex("Photo5")) == false ? Base64.encodeToString(cursor.getBlob(cursor.getColumnIndex("Photo5")), Base64.NO_WRAP) : "");
 
                 //String[] args2 = {rowID};
                 //String selectSQL = "select Photo1,Photo2 From InsertFarmer ORDER BY Id  DESC";
@@ -1088,10 +1089,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 //dataList.add(data);
 //            }
 //            while (cursor.moveToNext());
-        }
-        cursor.close();
-        this.getReadableDatabase().close();
-        db.close();
+            }
+            cursor.close();
+            this.getReadableDatabase().close();
+            db.close();
         } catch (Exception e) {
             e.printStackTrace();
             dataList = null;
@@ -1103,13 +1104,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<FarmerDetails> getThisDataListCommunityData(String regnum) {
         List<FarmerDetails> dataList = new ArrayList<FarmerDetails>();
         try{
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor cursor = db.rawQuery("Select * from InsertFarmer WHERE RegNo='"+regnum +"'", null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            //Cursor cursor = db.rawQuery("Select * from InsertFarmer WHERE RegNo='"+regnum +"'", null);
             //Cursor cursor = db.rawQuery("Select RegNo,Status,Summary,RemarksCode,RemarksName,User_Id,Latitude,Longitude,Pic1landLat,Pic1landLong,Pic2landLat,Pic2landLong,aawedak_present,aawedak_absent,lpc_rltd_chk_Id,lpc_awedn_chk_Id,ghosit_fasal_khti_Id,aawedan_ghosit_rakwa_Id,aawedak_one_family_Id,gehu_rayti,makka_rayti,chana_rayti,masur_rayti,arahar_rayti,rae_rayti,ekh_rayti,pyaj_rayti,aloo_rayti,gehu_gair_rayti,makka_gair_rayti,chana_gair_rayti,masur_gair_rayti,arahar_gair_rayti,rae_gair_rayti,ekh_gair_rayti,pyaj_gair_rayti,aloo_gair_rayti,swaghosana_sambandhit_id,swaghosana_sambandhit_nm,swaghosana_signer_name from InsertFarmer WHERE RegNo='"+regnum +"'", null);
             Cursor cursor = db.rawQuery("Select * from InsertFarmer WHERE RegNo='"+regnum +"'", null);
 
-        if (cursor.moveToFirst()) {
-          //  do {
+            if (cursor.moveToFirst()) {
+                //  do {
                 FarmerDetails data = new FarmerDetails();
                 data.setTypeofFarmer(cursor.getString(cursor.getColumnIndex("TypeofFarmer")));
                 data.setRegistrationNO(cursor.getString(cursor.getColumnIndex("RegNo")));
@@ -1180,20 +1181,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 data.setSwaghosana_sambandhit_id(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_id")));
                 data.setSwaghosana_sambandhit_Nm(cursor.getString(cursor.getColumnIndex("swaghosana_sambandhit_nm")));
                 data.setSwaghosana_sambandhit_signer_nm(cursor.getString(cursor.getColumnIndex("swaghosana_signer_name")));
-            data.setDate(cursor.getString(cursor.getColumnIndex("Date")));
-            data.setAawedan_karta_Id(cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")));
-            data.setAawedan_karta_Nm(cursor.getString(cursor.getColumnIndex("aawedan_karta_Nm")));
+                data.setDate(cursor.getString(cursor.getColumnIndex("Date")));
+                data.setAawedan_karta_Id(cursor.getString(cursor.getColumnIndex("aawedan_karta_Id")));
+                data.setAawedan_karta_Nm(cursor.getString(cursor.getColumnIndex("aawedan_karta_Nm")));
 
 
-            data.setIs_gehu(cursor.getString(cursor.getColumnIndex("Is_genhu")));
-            data.setIs_chana(cursor.getString(cursor.getColumnIndex("Is_chana")));
-            data.setIs_makka(cursor.getString(cursor.getColumnIndex("Is_makka")));
-            data.setIs_arahar(cursor.getString(cursor.getColumnIndex("Is_arhar")));
-            data.setIs_masur(cursor.getString(cursor.getColumnIndex("Is_masur")));
-            data.setIs_rai(cursor.getString(cursor.getColumnIndex("Is_rai")));
-            data.setIs_ikha(cursor.getString(cursor.getColumnIndex("Is_ikha")));
-            data.setIs_onion(cursor.getString(cursor.getColumnIndex("Is_onion")));
-            data.setIs_potato(cursor.getString(cursor.getColumnIndex("Is_potato")));
+                data.setIs_gehu(cursor.getString(cursor.getColumnIndex("Is_genhu")));
+                data.setIs_chana(cursor.getString(cursor.getColumnIndex("Is_chana")));
+                data.setIs_makka(cursor.getString(cursor.getColumnIndex("Is_makka")));
+                data.setIs_arahar(cursor.getString(cursor.getColumnIndex("Is_arhar")));
+                data.setIs_masur(cursor.getString(cursor.getColumnIndex("Is_masur")));
+                data.setIs_rai(cursor.getString(cursor.getColumnIndex("Is_rai")));
+                data.setIs_ikha(cursor.getString(cursor.getColumnIndex("Is_ikha")));
+                data.setIs_onion(cursor.getString(cursor.getColumnIndex("Is_onion")));
+                data.setIs_potato(cursor.getString(cursor.getColumnIndex("Is_potato")));
 
                 //data.setEt_aawedan_ghosit_rakwa(cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa")));
                 //data.setEt_aawedan_ghosit_rakwa_two(cursor.getString(cursor.getColumnIndex("et_aawedan_ghosit_rakwa_two")));
@@ -1246,17 +1247,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
                 //dataList.add(data);
-           // } while (cursor.moveToNext());
-        }
-        cursor.close();
-        this.getReadableDatabase().close();
-        db.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-        dataList = null;
-        // TODO: handle exception
+                // } while (cursor.moveToNext());
+            }
+            cursor.close();
+            this.getReadableDatabase().close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            dataList = null;
+            // TODO: handle exception
 
-    }
+        }
 
         return dataList;
     }
